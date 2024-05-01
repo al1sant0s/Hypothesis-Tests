@@ -2,36 +2,46 @@ import numpy as np
 from scipy.stats import norm, t
 import matplotlib.pyplot as plt
 
-class hypotest:
-    def __init__(self, sig, df, ts, cv, pvalue, alternative, reject, description):
+class Hypotest:
+    def __init__(self, rv, sig, df, ts, v0, alternative, description):
         self.sig = sig                          # Significance level
         self.df = df                            # Degrees of freedom
+        self.rv = rv                            # A random variable associated with the test statistic distribution
         self.ts = ts                            # Test statistic
-        self.cv = cv                            # Critical values
-        self.pvalue = pvalue                    # Pvalue associated with the test
+        self.v0 = v0                            # Parameter value under the null hypothesis
         self.alternative = alternative          # Type of alternative being used (left, right or bilateral).
-        self.reject = reject                    # Boolean value that indicates if null hypothesis should be rejected or not given the results of the test.
         self.description = description          # A short description about the test
 
+        # Compute pvalue and critical values associated with the test
+        if(alternative == "bilateral"):
+            self.cv = rv.ppf((self.sig/2, 1 - self.sig/2))
+            self.pvalue = rv.cdf(self.ts)
+            self.pvalue = 2 * (1 - self.pvalue) if self.pvalue > 0.5 else 2 * self.pvalue
+        elif(alternative == "left"):
+            self.cv = rv.ppf(self.sig)
+            self.pvalue = rv.cdf(self.ts)
+        else:
+            self.cv = rv.ppf(1 - self.sig)
+            self.pvalue = 1 - rv.cdf(self.ts)
 
-def t_test(data, mu_0, significance = 0.05, alternative = "bilateral"):
+        # Boolean value that indicates if null hypothesis should be rejected or not given the results of the test.
+        self.reject = self.pvalue < self.sig
 
-    n = data.size
-    df = n - 1
-    ts = (np.mean(data) - mu_0)/(np.sqrt(np.var(data, ddof = 1)/n))
+class TestT(Hypotest):
+    def __init__(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral"):
+        if(y != None):
+            pass
+        else:
+            self.xmean = np.mean(x)
+            self.estdv = np.sqrt(np.var(x, ddof = 1)/x.size)
+            description = f"T {alternative} test for one population mean, with a significance level of {sig}, against {mu_0}."
+        super().__init__(t(x.size - 1), sig, x.size - 1, (self.xmean - mu_0)/self.estdv, mu_0, alternative, description)
 
-    if(alternative == "bilateral"):
-        cv = t.cdf((significance/2, 1 - significance/2), df = df)
-        pvalue = 2 * t.cdf(-np.abs(ts), df = df)
-    elif(alternative == "left"):
-        cv = t.cdf(significance, df)
-        pvalue = t.cdf(ts, df = df)
-    else:
-        cv = t.cdf(1 - significance, df = df)
-        pvalue = 1 - t.cdf(ts, df = df)
-
-    description = f"T {alternative} test for one population mean, with a significance level of {significance}, against {mu_0}."
-    return hypotest(significance, df, ts, cv, pvalue, alternative, pvalue < significance,description)
+    def error02comp(self, v1):
+        if(self.alternative == "bilateral"):
+            qt1 = self.cv[0] + (self.v0 - v1)/self.estdv
+            qt2 = self.cv[1] + (self.v0 - v1)/self.estdv
+            return self.rv.cdf(qt2) - self.rv.cdf(qt1)
 
 
 dados = np.array([
@@ -45,6 +55,6 @@ dados = np.array([
 15.6965885,  20.0378430,  17.1616795,  12.8491778,  -3.6045550,  -2.7168218,
  5.0238398,   8.7786545])
 
-test = t_test(data = dados, mu_0 = 5, alternative = "right")
+test = TestT(x = dados, mu_0 = 5, sig = 0.05)
 
-print(test.ts, test.cv, test.pvalue, test.df)
+print(test.ts, test.cv, test.pvalue, test.df, test.error02comp(6))
