@@ -38,13 +38,15 @@ class HypoTstudTest(Hypotest):
                 df = ((rx + ry)**2)/((rx**2)/(nx - 1) + (ry**2)/(ny - 1))
 
             description = f"Two sampling T {tail[alternative]} test."
-            super().__init__(t(df = df), sig, (self.xmean - self.ymean - mu_0)/self.estdv, mu_0, alternative, description)
+            sampling_estimates = {"X sampling mean": self.xmean, "Y sampling mean": self.ymean}
+            super().__init__(t(df = df), f"T({df})", sig, (self.xmean - self.ymean - mu_0)/self.estdv, mu_0, alternative, description, sampling_estimates)
 
         else:
             self.estdv = np.sqrt(np.var(x, ddof = 1)/x.size)
-            description = f"One sampling T {tail[alternative]} test."
             df = nx - 1
-            super().__init__(t(df), sig, (self.xmean - mu_0)/self.estdv, mu_0, alternative, description)
+            description = f"One sampling T {tail[alternative]} test."
+            sampling_estimates = {"X sampling mean": self.xmean}
+            super().__init__(t(df), f"T({df})", sig, (self.xmean - mu_0)/self.estdv, mu_0, alternative, description, sampling_estimates)
 
 
     def error02comp(self, v1):
@@ -70,10 +72,14 @@ class HypoVarTest(Hypotest):
             self.vary = np.var(y, ddof = 1)
             ny = y.size
             description = f"F {tail[alternative]} test for two variances."
-            super().__init__(f(dfn = nx - 1, dfd = ny - 1), sig, self.varx/self.vary, sigma_squared, alternative, description)
+            sampling_estimates = {"X sampling variance": self.varx, "Y sampling variance": self.vary}
+            super().__init__(f(dfn = nx - 1, dfd = ny - 1), f"F({nx - 1}, {ny - 1})", sig, self.varx/self.vary, sigma_squared,
+                             alternative, description, sampling_estimates)
         else:
             description = f"Chi-squared {tail[alternative]} test for variance."
-            super().__init__(chi2(df = nx - 1), sig, (nx - 1)*self.varx/sigma_squared, sigma_squared, alternative, description)
+            sampling_estimates = {"X sampling variance": self.varx}
+            super().__init__(chi2(df = nx - 1), f"Chi-Squared({nx - 1})", sig, (nx - 1)*self.varx/sigma_squared, sigma_squared,
+                             alternative, description, sampling_estimates)
 
 
     def error02comp(self, v1):
@@ -95,7 +101,8 @@ class HypoPropTest(Hypotest):
         self.n = n
         self.estdv = np.sqrt((P - pi)/n) 
         description = f"Z {tail[alternative]} test for one proportion."
-        super().__init__(norm(), sig, (P - pi)/self.estdv, pi, alternative, description)
+        sampling_estimates = {"Sampling proportion": self.prop, "Sampling size": self.n}
+        super().__init__(norm(), f"Normal(0, 1)", sig, (P - pi)/self.estdv, pi, alternative, description, sampling_estimates)
 
     def error02comp(self, v1):
         if(self.alternative == "right"):
