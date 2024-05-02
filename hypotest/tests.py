@@ -96,13 +96,38 @@ class HypoVarTest(Hypotest):
 
 
 class HypoPropTest(Hypotest):
-    def __init__(self, P, n, pi, sig = 0.05, alternative = "bilateral"):
+    def __init__(self, P, n, pi0, sig = 0.05, alternative = "bilateral"):
         self.prop = P
         self.n = n
-        self.estdv = np.sqrt((P - pi)/n) 
+        self.estdv = np.sqrt(pi0*(1 - pi0)/n) 
         description = f"Z {tail[alternative]} test for one proportion."
         sampling_estimates = {"Sampling proportion": self.prop, "Sampling size": self.n}
-        super().__init__(norm(), f"Normal(0, 1)", sig, (P - pi)/self.estdv, pi, alternative, description, sampling_estimates)
+        super().__init__(norm(), f"Normal(0, 1)", sig, (P - pi0)/self.estdv, pi0, alternative, description, sampling_estimates)
+
+    def error02comp(self, v1):
+        if(self.alternative == "right"):
+            qt = self.cv + (self.v0 - v1)/self.estdv
+            return self.rv.cdf(qt)
+        elif(self.alternative == "left"):
+            qt = self.cv + (self.v0 - v1)/self.estdv
+            return 1 - self.rv.cdf(qt)
+        else:
+            qt1 = self.cv[0] + (self.v0 - v1)/self.estdv
+            qt2 = self.cv[1] + (self.v0 - v1)/self.estdv
+            return self.rv.cdf(qt2) - self.rv.cdf(qt1)
+
+
+class HypoProp02Test(Hypotest):
+    def __init__(self, p1, p2, n1, n2, pi0 = 0, sig = 0.05, alternative = "bilateral"):
+        self.prop1 = p1
+        self.prop2 = p2
+        self.n1 = n1
+        self.n2 = n2
+        self.estdv = np.sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2)
+        description = f"Z {tail[alternative]} test for one proportion."
+        sampling_estimates = {"Sampling proportion 01": self.prop1, "Sampling proportion 02": self.prop2,
+                              "Sampling size 01": self.n1, "Sampling size 02": self.n2}
+        super().__init__(norm(), f"Normal(0, 1)", sig, ((p1 - p2) - pi0)/self.estdv, pi0, alternative, description, sampling_estimates)
 
     def error02comp(self, v1):
         if(self.alternative == "right"):

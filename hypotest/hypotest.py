@@ -62,4 +62,4 @@ class Hypotest:
 
         if(retrieve):
             # Return everything in a list.
-            return print(results)
+            return results
