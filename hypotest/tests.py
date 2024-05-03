@@ -124,7 +124,7 @@ class HypoProp02Test(Hypotest):
         self.n1 = n1
         self.n2 = n2
         self.estdv = np.sqrt(p1*(1 - p1)/n1 + p2*(1 - p2)/n2)
-        description = f"Z {tail[alternative]} test for one proportion."
+        description = f"Z {tail[alternative]} test for two proportions."
         sampling_estimates = {"Sampling proportion 01": self.prop1, "Sampling proportion 02": self.prop2,
                               "Sampling size 01": self.n1, "Sampling size 02": self.n2}
         super().__init__(norm(), f"Normal(0, 1)", sig, ((p1 - p2) - pi0)/self.estdv, pi0, alternative, description, sampling_estimates)

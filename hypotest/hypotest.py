@@ -1,5 +1,7 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import prettytable
 from scipy.stats import norm, t
 
@@ -35,7 +37,7 @@ class Hypotest:
         return 1 - self.error02comp(beta)
 
 
-    def summarize(self, show = True, minimal = True, retrieve = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
+    def summarize(self, show = True, minimal = False, retrieve = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
         table = prettytable.PrettyTable(["Hypothesis test attributes", "Results"], **kwargs)
 
         # Set border style
@@ -63,3 +65,44 @@ class Hypotest:
         if(retrieve):
             # Return everything in a list.
             return results
+
+
+    def plot_test(self, inspect = "pvalue", lw = 3):
+        fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
+
+        x = np.linspace(self.rv.ppf(0.001), self.rv.ppf(0.999), 1000)
+
+        colors = ["blue", "gray", "yellow", "green"]
+
+        ax.plot(x, self.rv.pdf(x), linewidth = lw, linestyle="solid", color = colors[0], alpha = 1, label=f"Probability density function")
+        ax.hlines(0, np.min(ax.get_xticks()), np.max(ax.get_xticks()), color = "black")
+
+        xmin = np.min(ax.get_xticks())
+        xmax = np.max(ax.get_xticks())
+
+        ax.set_title(self.description)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(base = 0.5, offset = 0))
+        #ax.set_xticks(np.arange(np.min(ax.get_xticks()), np.max(ax.get_xticks()), 0.5))
+        ax.set_xlim(np.min(x), np.max(x))
+        ax.text(75, .025, r"$\mu=115,\ \sigma=15$")
+
+        if(inspect == "pvalue"):
+            ax.vlines(self.cv, 0, self.rv.pdf(self.cv), color = colors[3], linewidth = lw, linestyle = "solid", label = f"Rejection values")
+            ax.vlines(self.ts, 0, self.rv.pdf(self.ts), color = colors[1], linewidth = lw, linestyle = "dashed", label = f"Statistic test")
+
+            if(self.alternative == "bilateral"):
+                if(self.rv.cdf(self.ts) < 0.5):
+                    fill_direction = "left"
+                else:
+                    fill_direction = "right"
+            else:
+                fill_direction = self.alternative
+                
+            ax.legend()
+
+        else:
+            pass
+
+        
+        #ax.set_xticks(list(ax.get_xticks()) + [self.pvalue], [str(a) for a in ax.get_xticks()] + ["pvalue"])
+        plt.show()
