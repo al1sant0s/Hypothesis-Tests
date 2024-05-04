@@ -67,36 +67,41 @@ class Hypotest:
             return results
 
 
-    def plot_test(self, inspect = "pvalue", lw = 3):
+    def plot_test(self, fill_pvalue = True, fill_rejection = True, fill_nonrejection = False, lw = 3, colors = {}):
+
         fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
 
-        x = np.linspace(self.rv.ppf(0.001), self.rv.ppf(0.999), 1000)
+        xoffset = 0.001
 
-        colors = ["blue", "gray", "yellow", "green"]
+        x = np.linspace(self.rv.ppf(xoffset), self.rv.ppf(1 - xoffset), int(1/xoffset))
+        y = self.rv.pdf(x)
 
-        ax.plot(x, self.rv.pdf(x), linewidth = lw, linestyle="solid", color = colors[0], alpha = 1, label=f"Probability density function")
-        ax.hlines(0, np.min(ax.get_xticks()), np.max(ax.get_xticks()), color = "black")
+        #true_colors = {"pdf": "tab:pink", "ts": "blue", "cr": "red", "ncr": "gray", "pv": "cyan", "bl": "tab:purple"}
+        true_colors = {"pdf": "purple", "ts": "orange", "cr": "red", "ncr": "gray", "pv": "cyan", "bl": "black"}
+        true_colors.update(colors)
 
-        xmin = np.min(ax.get_xticks())
-        xmax = np.max(ax.get_xticks())
+        ax.plot(x, y, linewidth = lw, linestyle="solid", color = true_colors["pdf"], alpha = 1, label=f"Probability density function")
+        ax.hlines(0, np.min(ax.get_xticks()), np.max(ax.get_xticks()), color = true_colors["bl"])
+        ax.vlines(self.cv, 0, self.rv.pdf(self.cv), color = true_colors["cr"], linewidth = lw, linestyle = "solid", label = f"Rejection values")
+        ax.vlines(self.ts, 0, self.rv.pdf(self.ts), color = true_colors["ts"], linewidth = lw, linestyle = "dashed", label = f"Statistic test")
 
         ax.set_title(self.description)
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(base = 0.5, offset = 0))
-        #ax.set_xticks(np.arange(np.min(ax.get_xticks()), np.max(ax.get_xticks()), 0.5))
-        ax.set_xlim(np.min(x), np.max(x))
+        #ax.xaxis.set_major_locator(ticker.MultipleLocator(base = 0.5, offset = 0))
+        ax.set_xlim(x.min(), x.max())
         ax.text(75, .025, r"$\mu=115,\ \sigma=15$")
 
-        if(inspect == "pvalue"):
-            ax.vlines(self.cv, 0, self.rv.pdf(self.cv), color = colors[3], linewidth = lw, linestyle = "solid", label = f"Rejection values")
-            ax.vlines(self.ts, 0, self.rv.pdf(self.ts), color = colors[1], linewidth = lw, linestyle = "dashed", label = f"Statistic test")
+        if(fill_pvalue):
 
             if(self.alternative == "bilateral"):
-                if(self.rv.cdf(self.ts) < 0.5):
-                    fill_direction = "left"
-                else:
-                    fill_direction = "right"
+                exclude = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
+                ax.fill_between(x, 0, y, where = np.logical_or(x <= exclude.min(), x >= exclude.max()))
             else:
-                fill_direction = self.alternative
+                if(self.alternative == "left"):
+                    include = (x <= self.ts).sum() - 1
+                    ax.fill_between(x[0:include], 0, y[0:include])
+                elif(self.alternative == "right"):
+                    exclude = (x <= self.ts).sum()
+                    ax.fill_between(x[exclude:], 0, y[exclude:])
                 
             ax.legend()
 
