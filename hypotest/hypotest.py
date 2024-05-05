@@ -39,7 +39,6 @@ class Hypotest:
         betas = self.error02comp(v1)
 
         table = prettytable.PrettyTable(["Values under alternative hypothesis", "Type II error (Beta)", "Power (1 - Beta)"], **kwargs)
-        table.header = False
         table.hrules = prettytable.ALL
 
         # Set border style
@@ -145,3 +144,20 @@ class Hypotest:
         ax.set_xlim(x.min(), x.max())
         plt.show()
 
+
+    def plot_power(self, v1, lw = 3):
+
+        fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
+
+        x = np.array(v1)
+        y = self.power(v1, show = False)
+
+        ax.plot(x, y, linewidth = lw, linestyle="solid")
+        ax.legend()
+
+        ax.set_xlabel(r"Values under $\mathscr{H}_1$")  # Add an x-label to the axes.
+        ax.set_ylabel(r'$1 - \beta$')  # Add a y-label to the axes.
+
+        ax.set_title(f"Power curve for {self.description}")
+
+        plt.show()
