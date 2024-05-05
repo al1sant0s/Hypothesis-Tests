@@ -67,47 +67,62 @@ class Hypotest:
             return results
 
 
-    def plot_test(self, fill_pvalue = True, fill_rejection = True, fill_nonrejection = False, lw = 3, colors = {}):
+    def plot_test(self, show_values = True, show_pvalue = False, lw = 3, colors = {}):
 
         fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
 
         xoffset = 0.001
-
         x = np.linspace(self.rv.ppf(xoffset), self.rv.ppf(1 - xoffset), int(1/xoffset))
         y = self.rv.pdf(x)
 
         #true_colors = {"pdf": "tab:pink", "ts": "blue", "cr": "red", "ncr": "gray", "pv": "cyan", "bl": "tab:purple"}
-        true_colors = {"pdf": "purple", "ts": "orange", "cr": "red", "ncr": "gray", "pv": "cyan", "bl": "black"}
+        true_colors = {"pdf": "black", "ts": "blue", "cr": "red", "pv": "purple", "bl": "black"}
+        #true_colors = {"pdf": "purple", "ts": "orange", "cr": "red", "pv": "cyan", "bl": "black"}
+        #true_colors = {"pdf": "purple", "ts": "green", "cr": "red", "pv": "pink", "bl": "black"}
+        #true_colors = {"pdf": "blue", "ts": "green", "cr": "red", "pv": "yellow", "bl": "black"}
         true_colors.update(colors)
 
-        ax.plot(x, y, linewidth = lw, linestyle="solid", color = true_colors["pdf"], alpha = 1, label=f"Probability density function")
-        ax.hlines(0, np.min(ax.get_xticks()), np.max(ax.get_xticks()), color = true_colors["bl"])
-        ax.vlines(self.cv, 0, self.rv.pdf(self.cv), color = true_colors["cr"], linewidth = lw, linestyle = "solid", label = f"Rejection values")
-        ax.vlines(self.ts, 0, self.rv.pdf(self.ts), color = true_colors["ts"], linewidth = lw, linestyle = "dashed", label = f"Statistic test")
+        show_cr = False
 
-        ax.set_title(self.description)
-        #ax.xaxis.set_major_locator(ticker.MultipleLocator(base = 0.5, offset = 0))
-        ax.set_xlim(x.min(), x.max())
-        ax.text(75, .025, r"$\mu=115,\ \sigma=15$")
-
-        if(fill_pvalue):
-
+        # Show rejection region only if pvalue is smaller than significance
+        if(not(show_pvalue) or self.pvalue < self.sig):
+            show_cr = True
             if(self.alternative == "bilateral"):
-                exclude = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
-                ax.fill_between(x, 0, y, where = np.logical_or(x <= exclude.min(), x >= exclude.max()))
-            else:
-                if(self.alternative == "left"):
-                    include = (x <= self.ts).sum() - 1
-                    ax.fill_between(x[0:include], 0, y[0:include])
-                elif(self.alternative == "right"):
-                    exclude = (x <= self.ts).sum()
-                    ax.fill_between(x[exclude:], 0, y[exclude:])
+                include = np.logical_or(x <= self.cv.min(), x >= self.cv.max())
+                ax.fill_between(x, 0, y, where = include, color = true_colors["cr"], label = "Rejection region")
+            elif(self.alternative == "left"):
+                include = (x <= self.cv)
+                ax.fill_between(x, 0, y, where = include, color = true_colors["cr"], label = "Rejection region")
+            elif(self.alternative == "right"):
+                include = (x >= self.cv)
+                ax.fill_between(x, 0, y, where = include, color = true_colors["cr"], label = "Rejection region")
+
+        if(show_pvalue):
+            if(self.alternative == "bilateral"):
+                include = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
+                include = np.logical_or(x <= include.min(), x >= include.max())
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+            elif(self.alternative == "left"):
+                include = (x <= self.ts)
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+            elif(self.alternative == "right"):
+                include = (x >= self.ts)
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+
                 
-            ax.legend()
+        #Elaborate rest of the plot
+        if(not(show_cr)):
+            ax.vlines(self.cv, 0, self.rv.pdf(self.cv), color = true_colors["cr"], linewidth = lw, linestyle = "dashdot", label = "Critical values")
 
-        else:
-            pass
+        ax.vlines(self.ts, 0, self.rv.pdf(self.ts), color = true_colors["ts"], linewidth = lw, linestyle = "dashed", label = f"Statistic test")
+        ax.plot(x, y, linewidth = lw, linestyle="solid", color = true_colors["pdf"], label=f"Probability density function")
+        ax.hlines(0, np.min(ax.get_xticks()), np.max(ax.get_xticks()), color = true_colors["bl"], linewidth = lw)
+        ax.legend()
 
-        
-        #ax.set_xticks(list(ax.get_xticks()) + [self.pvalue], [str(a) for a in ax.get_xticks()] + ["pvalue"])
+        ax.set_title(f"{self.description} " + rf"$(\alpha = {self.sig})$" + f"\n{self.distribution}")
+
+        if(show_values):
+            ax.xaxis.set_major_locator(ticker.FixedLocator(np.hstack([self.cv, self.ts])))
+
+        ax.set_xlim(x.min(), x.max())
         plt.show()
