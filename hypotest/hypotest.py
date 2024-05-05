@@ -39,7 +39,7 @@ class Hypotest:
         betas = self.error02comp(v1)
 
         table = prettytable.PrettyTable(["Values under alternative hypothesis", "Type II error (Beta)", "Power (1 - Beta)"], **kwargs)
-        #table.header = False
+        table.header = False
         table.hrules = prettytable.ALL
 
         # Set border style
@@ -53,7 +53,7 @@ class Hypotest:
         if(show):
             print(table)
 
-        return betas
+        return 1 - betas
 
 
     def summarize(self, show = True, minimal = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
@@ -144,3 +144,4 @@ class Hypotest:
 
         ax.set_xlim(x.min(), x.max())
         plt.show()
+
