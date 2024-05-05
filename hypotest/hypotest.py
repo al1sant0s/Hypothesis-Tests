@@ -33,11 +33,30 @@ class Hypotest:
         self.reject = self.pvalue < self.sig
 
 
-    def power(self, beta):
-        return 1 - self.error02comp(beta)
+    def power(self, v1, show = True, align="l", border_style = "DOUBLE_BORDER", **kwargs):
+
+        v1 = np.array(v1)
+        betas = self.error02comp(v1)
+
+        table = prettytable.PrettyTable(["Values under alternative hypothesis", "Type II error (Beta)", "Power (1 - Beta)"], **kwargs)
+        #table.header = False
+        table.hrules = prettytable.ALL
+
+        # Set border style
+        table.set_style(getattr(prettytable, border_style))
+
+        for i in v1:
+            err2 = self.error02comp(i)
+            table.add_row([i, err2, 1 - err2])
+        table.align = align
+
+        if(show):
+            print(table)
+
+        return betas
 
 
-    def summarize(self, show = True, minimal = False, retrieve = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
+    def summarize(self, show = True, minimal = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
         table = prettytable.PrettyTable(["Hypothesis test attributes", "Results"], **kwargs)
 
         # Set border style
@@ -62,9 +81,8 @@ class Hypotest:
         if(show):
             print(table)
 
-        if(retrieve):
-            # Return everything in a list.
-            return results
+        # Return everything in a list.
+        return results
 
 
     def plot_test(self, show_values = True, show_pvalue = False, lw = 3, colors = {}):
