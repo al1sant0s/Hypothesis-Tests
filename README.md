@@ -25,5 +25,5 @@ You can install them pasting the following command `pip install numpy scipy matp
 After installation of said requirements, you can install this package following these steps:
 
 1. Inside your terminal, get into the root of your project directory.
-2. Use the following command to download the package `git clone https://github.com/al1sant0s/Hypothesis-Tests/`
-3. Finally, import the package from your main python file adding this to line `import hypotest`.
+2. Use the following command to download the package `git clone https://github.com/al1sant0s/Hypothesis-Tests/ Hypothesis`
+3. Finally, import the package from your main python file adding this to line `import Hypothesis.hypotest as hypotest`.
