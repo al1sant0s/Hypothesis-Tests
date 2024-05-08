@@ -52,8 +52,8 @@ This object will have many attributes and methods. Bellow are listed **only** th
    * v0: test value under null hypothesis.
    * alternative: type of alternative hypothesis being used (left, right or bilateral).
    * description: a short description about the test.
-   * sampling_estimates: this will be a dictonary.
-   * cv: a numpy array with one or two crictical values.
+   * sampling_estimates: this will be a dictonary with specific statistic values for the test.
+   * cv: a numpy array with one or two critical values of the test.
    * pvalue: self-explanatory.
    * reject: a boolean variable that tells if null hypothesis should be rejected (or not).
 
