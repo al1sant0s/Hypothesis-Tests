@@ -117,13 +117,13 @@ class Hypotest:
             if(self.alternative == "bilateral"):
                 include = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
                 include = np.logical_or(x <= include.min(), x >= include.max())
-                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = f"P-value")
             elif(self.alternative == "left"):
                 include = (x <= self.ts)
-                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = f"P-value")
             elif(self.alternative == "right"):
                 include = (x >= self.ts)
-                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = "P-value")
+                ax.fill_between(x, 0, y, where = include, color = true_colors["pv"], label = f"P-value")
 
                 
         #Elaborate rest of the plot
