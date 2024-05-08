@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.stats import norm, t, chi2, f
-from scipy.stats import chi2, f
 import matplotlib.pyplot as plt
 from .hypotest import Hypotest
 
@@ -9,7 +8,6 @@ from .hypotest import Hypotest
 # Help with test description.
 
 tail = {"left": "left one-tailed", "right": "right one-tailed", "bilateral": "two-tailed"}
-
 
 ### Tests available
 
@@ -42,7 +40,7 @@ class HypoTstudTest(Hypotest):
             super().__init__(t(df = df), f"T({df})", sig, (self.xmean - self.ymean - mu_0)/self.estdv, mu_0, alternative, description, sampling_estimates)
 
         else:
-            self.estdv = np.sqrt(np.var(x, ddof = 1)/x.size)
+            self.estdv = np.sqrt(varx/x.size)
             df = nx - 1
             description = f"One sampling T {tail[alternative]} test."
             sampling_estimates = {"X sampling mean": self.xmean}
@@ -51,10 +49,10 @@ class HypoTstudTest(Hypotest):
 
     def error02comp(self, v1):
         if(self.alternative == "right"):
-            qt = self.cv + (self.v0 - v1)/self.estdv
+            qt = self.cv[0] + (self.v0 - v1)/self.estdv
             return self.rv.cdf(qt)
         elif(self.alternative == "left"):
-            qt = self.cv + (self.v0 - v1)/self.estdv
+            qt = self.cv[0] + (self.v0 - v1)/self.estdv
             return 1 - self.rv.cdf(qt)
         else:
             qt1 = self.cv[0] + (self.v0 - v1)/self.estdv
@@ -84,10 +82,10 @@ class HypoVarTest(Hypotest):
 
     def error02comp(self, v1):
         if(self.alternative == "right"):
-            qt = self.cv * self.v0/v1
+            qt = self.cv[0] * self.v0/v1
             return self.rv.cdf(qt)
         elif(self.alternative == "left"):
-            qt = self.cv * self.v0/v1
+            qt = self.cv[0] * self.v0/v1
             return 1 - self.rv.cdf(qt)
         else:
             qt1 = self.cv[0] * self.v0/v1

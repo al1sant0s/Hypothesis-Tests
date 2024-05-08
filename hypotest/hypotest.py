@@ -23,10 +23,10 @@ class Hypotest:
             self.pvalue = rv.cdf(self.ts)
             self.pvalue = 2 * (1 - self.pvalue) if self.pvalue > 0.5 else 2 * self.pvalue
         elif(alternative == "left"):
-            self.cv = rv.ppf(self.sig)
+            self.cv = np.array([rv.ppf(self.sig)])
             self.pvalue = rv.cdf(self.ts)
         else:
-            self.cv = rv.ppf(1 - self.sig)
+            self.cv = np.array([rv.ppf(1 - self.sig)])
             self.pvalue = 1 - rv.cdf(self.ts)
 
         # Boolean value that indicates if null hypothesis should be rejected or not given the results of the test.
@@ -36,7 +36,6 @@ class Hypotest:
     def power(self, v1, show = True, align="l", border_style = "DOUBLE_BORDER", **kwargs):
 
         v1 = np.array(v1)
-        betas = self.error02comp(v1)
 
         table = prettytable.PrettyTable(["Values under alternative hypothesis", "Type II error (Beta)", "Power (1 - Beta)"], **kwargs)
         table.hrules = prettytable.ALL
@@ -44,15 +43,19 @@ class Hypotest:
         # Set border style
         table.set_style(getattr(prettytable, border_style))
 
+        powers = np.array([])
+
         for i in v1:
             err2 = self.error02comp(i)
             table.add_row([i, err2, 1 - err2])
+            powers = np.concatenate([powers, [1 - err2]])
         table.align = align
 
         if(show):
             print(table)
 
-        return 1 - betas
+        # Return everything in a numpy array.
+        return powers
 
 
     def summarize(self, show = True, minimal = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
@@ -70,17 +73,17 @@ class Hypotest:
         table.add_row(["Pvalue", self.pvalue])
         table.add_row(["Rejet null hypothesis?", "Yes" if self.reject else "No"])
 
-        results = [self.description, self.distribution, self.v0, self.alternative, self.sig, self.pvalue, self.reject]
+        results = np.array([self.description, self.distribution, self.v0, self.alternative, self.sig, self.pvalue, self.reject])
         if(not(minimal)):
             table.add_rows([[key, self.sampling_estimates[key]] for key in self.sampling_estimates])
             table.add_row(["Statistic test", self.ts])
             table.add_row(["Critical values", self.cv])
-            results = results + list(self.sampling_estimates.values()) + [self.ts, self.cv]
+            results = np.concatenate([results, list(self.sampling_estimates.values()), [self.ts], self.cv])
 
         if(show):
             print(table)
 
-        # Return everything in a list.
+        # Return everything in a numpy array.
         return results
 
 
@@ -92,11 +95,7 @@ class Hypotest:
         x = np.linspace(self.rv.ppf(xoffset), self.rv.ppf(1 - xoffset), int(1/xoffset))
         y = self.rv.pdf(x)
 
-        #true_colors = {"pdf": "tab:pink", "ts": "blue", "cr": "red", "ncr": "gray", "pv": "cyan", "bl": "tab:purple"}
         true_colors = {"pdf": "black", "ts": "blue", "cr": "red", "pv": "purple", "bl": "black"}
-        #true_colors = {"pdf": "purple", "ts": "orange", "cr": "red", "pv": "cyan", "bl": "black"}
-        #true_colors = {"pdf": "purple", "ts": "green", "cr": "red", "pv": "pink", "bl": "black"}
-        #true_colors = {"pdf": "blue", "ts": "green", "cr": "red", "pv": "yellow", "bl": "black"}
         true_colors.update(colors)
 
         show_cr = False
@@ -153,7 +152,6 @@ class Hypotest:
         y = self.power(v1, show = False)
 
         ax.plot(x, y, linewidth = lw, linestyle="solid")
-        ax.legend()
 
         ax.set_xlabel(r"Values under $\mathscr{H}_1$")  # Add an x-label to the axes.
         ax.set_ylabel(r'$1 - \beta$')  # Add a y-label to the axes.
