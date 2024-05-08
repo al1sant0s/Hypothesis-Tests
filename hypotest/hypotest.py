@@ -3,7 +3,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import prettytable
-from scipy.stats import norm, t
 
 class Hypotest:
     def __init__(self, rv, distribution, sig, ts, v0, alternative, description, sampling_estimates = {}):
