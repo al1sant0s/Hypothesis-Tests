@@ -14,11 +14,13 @@ tail = {"left": "left one-tailed", "right": "right one-tailed", "bilateral": "tw
 class HypoTstudTest(Hypotest):
     def __init__(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False):
 
+        x = np.array(x)
         self.xmean = np.mean(x)
         nx = x.size
         varx = np.var(x, ddof = 1)
 
         if(y is not None):
+            y = np.array(y)
             self.ymean = np.mean(y)
             ny = y.size
             vary = np.var(y, ddof = 1)
@@ -63,10 +65,12 @@ class HypoTstudTest(Hypotest):
 class HypoVarTest(Hypotest):
     def __init__(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral"):
 
+        x = np.array(x)
         self.varx = np.var(x, ddof = 1)
         nx = x.size
 
         if(y is not None):
+            y = np.array(y)
             self.vary = np.var(y, ddof = 1)
             ny = y.size
             description = f"F {tail[alternative]} test for two variances."
