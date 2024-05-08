@@ -17,7 +17,13 @@ tests available, they are:
 
 More tests might be added in the future.
 
-## Instalation
+## Installation
 
 Before using this package, you need to make sure to have installed numpy, scipy, matplotlib and prettytable onto your system.
 You can install them pasting the following command `pip install numpy scipy matplotlib prettytable` into your cli.
+
+After installation of said requirements, you can install this package following these steps:
+
+1. Inside your terminal, get into the root of your project directory.
+2. Use the following command to download the package `git clone https://github.com/al1sant0s/Hypothesis-Tests/`
+3. Finally, import the package from your main python file adding this to line `import hypotest`.
