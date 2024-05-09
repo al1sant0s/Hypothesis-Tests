@@ -46,40 +46,44 @@ Also there is one special class called Hypotest. `Hypotest` class does not perfo
 It just serves as the base class used to construct the classes above. **You will never need to interact directly with this class.**
 
 To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters you need to pass
-to them are listed bellow:
+to them are described bellow.
 
-   * `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
-      * x: the first sample for the test. It can be a list of a numpy array.
-      * y (optional): The second sample for the test. It can be a list of a numpy array.
-      * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
-        this is the difference between the means.
-      * sig: the significance level used for this test.
-      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
-      * var_equal (only used for two samples tests): indicates whether the two samples are taken from two populations with the same variance.
+### `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
+Used to perform tests for mean(s) using one or two samples.
+   * x: the first sample for the test. It can be a list of a numpy array.
+   * y (optional): The second sample for the test. It can be a list of a numpy array.
+   * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
+     this is the difference between the means.
+   * sig: the significance level used for this test.
+   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+   * var_equal (only used for two samples tests): indicates whether the two samples are taken from two populations with the same variance.
 
-   * `HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")`
-      * x: the first sample for the test. It can be a list of a numpy array.
-      * y (optional): The second sample for the test. It can be a list of a numpy array.
-      * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
-        this is the ratio between the variances.
-      * sig: the significance level used for this test.
-      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+### `HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")`
+Used to perform tests for variance(s) using one or two samples.
+   * x: the first sample for the test. It can be a list of a numpy array.
+   * y (optional): The second sample for the test. It can be a list of a numpy array.
+   * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
+     this is the ratio between the variances.
+   * sig: the significance level used for this test.
+   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
-   * `HypoPropTest(self, P, n, pi0, sig = 0.05, alternative = "bilateral")`
-      * P: the sample proportion.
-      * n: the size of the sample which the P proportion was taken from.
-      * pi0: this represents the value under null hypothesis. The true value of the proportion in the population.
-      * sig: the significance level used for this test.
-      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+### `HypoPropTest(self, P, n, pi0, sig = 0.05, alternative = "bilateral")`
+Used to perform tests for one proportion.
+   * P: the sample proportion.
+   * n: the size of the sample which the P proportion was taken from.
+   * pi0: this represents the value under null hypothesis. The true value of the proportion in the population.
+   * sig: the significance level used for this test.
+   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
     
-   * `HypoProp02Test(self, p1, p2, n1, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
-      * p1: the sample 01 proportion.
-      * p2: the sample 02 proportion.
-      * n1: the size of the sample 01 which the p1 proportion was taken from.
-      * n2: the size of the sample 02 which the p1 proportion was taken from.
-      * pi0: this represents the value under null hypothesis. The value of the difference between the two proportions in the populations.
-      * sig: the significance level used for this test.
-      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+### `HypoProp02Test(self, p1, p2, n1, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
+Used to perform tests for two proportions.
+   * p1: the sample 01 proportion.
+   * p2: the sample 02 proportion.
+   * n1: the size of the sample 01 which the p1 proportion was taken from.
+   * n2: the size of the sample 02 which the p1 proportion was taken from.
+   * pi0: this represents the value under null hypothesis. The value of the difference between the two proportions in the populations.
+   * sig: the significance level used for this test.
+   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
 For any of these, an object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
