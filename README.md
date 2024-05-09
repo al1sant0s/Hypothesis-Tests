@@ -138,9 +138,19 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
       * lw: control the linewidth of the lines of the plot.
 
-With all of this out of the way, now let's jump into action with some examples of usage.
+With all of this out of the way, we can now check some examples of usage.
 
 ## Usage
+
+In the examples bellow we will use these samples.
+```{python}
+import numpy as np
+
+sample01 = np.array([])
+```
+
+### Test for one mean
+
 
 ### Summarize test
 
