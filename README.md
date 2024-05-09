@@ -79,29 +79,29 @@ Used to perform tests for two proportions.
    * p1: the sample 01 proportion.
    * p2: the sample 02 proportion.
    * n1: the size of the sample 01 which the p1 proportion was taken from.
-   * n2: the size of the sample 02 which the p1 proportion was taken from.
+   * n2: the size of the sample 02 which the p2 proportion was taken from.
    * pi0: this represents the value under null hypothesis. The value of the difference between the two proportions in the populations.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
-For any of these, an object of `Hypotest` class will be returned.
+For any of these tests, an object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
 
 * Attributes available for all test objects:
    * sig: significance level of the test.
    * ts: test statistic value of the test.
-   * v0: test value under null hypothesis.
+   * v0: parameter value under null hypothesis.
    * alternative: type of alternative hypothesis being used (left, right or bilateral).
    * description: a short description about the test.
    * sampling_estimates: this will be a dictonary with specific statistic values for the test.
    * cv: a numpy array with one or two critical values of the test.
-   * pvalue: self-explanatory.
+   * pvalue: the pvalue calculated for the test.
    * reject: a boolean variable that tells if null hypothesis should be rejected (or not).
 
 * Methods available for all test objects:
    * `power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)`
      computes power of test for values passed through v1 parameter.
-     * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
+     * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
      * show: if set to True, it will print a table built from prettytable with results.
      * align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
      * border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
@@ -134,7 +134,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
        
    * `plot_power(self, v1, lw = 3)` will make a plot of the power (power curve) for each value passed through v1.
-     * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
+     * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
       * lw: control the linewidth of the lines of the plot.
 
 With all of this out of the way, we can now check some examples of usage.
