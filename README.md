@@ -145,12 +145,18 @@ With all of this out of the way, we can now check some examples of usage.
 In the examples bellow we will use these samples.
 ```{python}
 import numpy as np
+import Hypothesis.hypotest as hypotest
 
-sample01 = np.array([])
+sample01 = np.array([7, 9, 6, 11, 13, 8, 7, 13, 12, 9])
+sample02 = np.array([12, 8, 9, 13, 14, 9, 8, 10, 7, 15])
 ```
 
 ### Test for one mean
 
+Test if the mean of the population where sample01 was taken from is equal to 9 or not,
+using 0.05 significance.
+
+`{python} one_mean_test = hypotest.HypoTstudTest(x = sample01, sig = 0.05, alternative = "bilateral")`
 
 ### Summarize test
 
