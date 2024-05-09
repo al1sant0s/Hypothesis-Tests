@@ -155,7 +155,7 @@ sample02 = rng.normal(4.6, 6, 25)
 ### Test for one mean
 
 Test if the mean of the population where sample01 was taken from is equal to 5 or not,
-using 0.05 significance. We have this test then:
+using 0.05 significance level. We have this test then:
 
 $$
    \begin{cases}
@@ -167,6 +167,7 @@ $$
 Now doing the test.
 ```{python}
 one_mean_test = hypotest.HypoTstudTest(x = sample01, mu_0 = 5, sig = 0.05, alternative = "bilateral")
+
 print("\n--- Test for one mean done! Results presented bellow. ---\n")
 one_mean_test.summarize() # See the results
 ```
@@ -194,7 +195,41 @@ one_mean_test.plot_test() # visualize test
 
 The result might vary slightly depending on the backend matplotlib is using in your system. It's recommended to maximize the plot window to have a better look at it.
 
-### Test for two mean
+### Test for two means
+
+Test if sample01 and sample02 were taken from 2 populations in which population 02 has a mean greater than the mean of population 01.
+Use 0.07 as the significance level. We have this test then:
+
+$$
+   \begin{cases}
+      \mathscr{H}_0: \mu_1 - \mu_2 = 0\\
+      \mathscr{H}_1: \mu_1 - \mu_2 < 0
+   \end{cases}
+$$
+
+Now doing the test.
+```{python}
+# We use var_equal = True because we know the samples were taken from 2 populations with same variance.
+two_mean_test = hypotest.HypoTstudTest(x = sample01, y = sample02, mu_0 = 0, sig = 0.07, alternative = "left", var_equal = True)
+
+print("\n--- Test for two means done! Results presented bellow. ---\n")
+two_mean_test.summarize() # See the results
+
+two_mean_test.plot_test() # plot the test without showing pvalue area
+two_mean_test.plot_test(show_pvalue = True) # now plot the test showing pvalue area
+```
+
+Now we will plot a power curve for this test.
+```{python}
+two_mean_test.plot_power(np.linspace(-10,2,100), lw = 5) # plot power curve with a thicker linewidth
+```
+
+We can also print a table of power for a few selected values under alternative hypothesis.
+```{python}
+powers = two_mean_test.power([-5,-4,-3,-2,-1]) # print power table and get the powers into powers variable
+
+print(powers) # print the powers
+```
 
 ### Visualizing test
 
