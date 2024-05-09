@@ -46,7 +46,7 @@ It just serves as the base class used to construct the classes above. **You will
 To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. An object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
 
-* Attributes available for all tests objects:
+* Attributes available for all test objects:
    * sig: significance level of the test.
    * ts: test statistic value of the test.
    * v0: test value under null hypothesis.
@@ -57,9 +57,9 @@ This object will have many attributes and methods. Bellow are listed **only** th
    * pvalue: self-explanatory.
    * reject: a boolean variable that tells if null hypothesis should be rejected (or not).
 
-* Methods available:
+* Methods available for all test objects:
    * `power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)`
-     computes power of test for values passed through v1 parameter. Each argument is explained bellow.
+     computes power of test for values passed through v1 parameter.
      * v1: a single or sequence of values for power to be computed from.
      * show: if set to True, it will print a table built from prettytable with results.
      * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
@@ -75,6 +75,14 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
      * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
      * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+   
+    It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
+
+  * `plot_test(self, show_values = True, show_pvalue = False, lw = 3, colors = {})` will make a plot of the test itself.
+     * show_values: if set to True, it will show critical values and the test statistic value on x axis, otherwise it will let matplotlib choose the x axis marks (ticks).
+     * show_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
+     * lw: control the linewidth of the lines of the plot.
+     * colors: this dictonary is used to plot the test with 
 
 these general
 attributes and methods that are available for all classes
