@@ -32,7 +32,9 @@ Now you are ready to start.
 
 ## How it works?
 
-Before getting into practical usage of the tests, some clarification about some small technical details needs to be done.
+Before getting into practical usage of the tests, some clarification needs to be done.
+If you wish, you can skip straight to the usage section and come back here later in case you need more details.
+
 Each test is built from a specific class. Bellow are listed the classes used to perform each test:
 
 * `HypoTstudTest` class performs tests for mean(s) using one or two samples.
@@ -43,7 +45,19 @@ Each test is built from a specific class. Bellow are listed the classes used to 
 Also there is one special class called Hypotest. `Hypotest` class does not perform any test.
 It just serves as the base class used to construct the classes above. **You will never need to interact directly with this class.**
 
-To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. An object of `Hypotest` class will be returned.
+To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters you need to pass
+to them are listed bellow:
+   * `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
+      * x: the first sample for the test. It can be a list of a numpy array.
+      * y (optional): The second sample for the test. It can be a list of a numpy array.
+      * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
+        this is the difference between the means.
+     * sig: the significance level.
+     * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+     * var_equal (only used for two samples tests): indicates if the two samples are taken from two populations with the same variance.
+
+
+An object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
 
 * Attributes available for all test objects:
