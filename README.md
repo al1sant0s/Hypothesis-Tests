@@ -167,19 +167,34 @@ $$
 Now doing the test.
 ```{python}
 one_mean_test = hypotest.HypoTstudTest(x = sample01, mu_0 = 5, sig = 0.05, alternative = "bilateral")
-print("Test for one mean done! Results presented bellow.")
+print("\n--- Test for one mean done! Results presented bellow. ---\n")
 one_mean_test.summarize() # See the results
 ```
 
 Print a compact table setting minimal to True, using a different border style.
 ```{python}
-print("Print the same table with less information with a different appearance.")
+print("\n--- Print the same table with less information and with a different appearance. ---\n")
 one_mean_test.summarize(minimal = True, border_style = "SINGLE_BORDER") # See the results
 ```
+We can choose to not print the table and only get the results instead.
+```{python}
+results = one_mean_test.summarize(show = False, minimal = True, border_style = "SINGLE_BORDER") # Get the results
 
+# Check pvalue using both the class attribute and the results (the 6th line of the table is where pvalue appear so we use 5 as index).
+print(one_mean_test.pvalue, results[5]) # it should print the same value twice
 
+# Print everything from results.
+print(results)
+```
+Finally, we can visualize the test using matplotlib plots.
 
-### Summarize test
+```{python}
+one_mean_test.plot_test() # visualize test
+```
+
+The result might vary slightly depending on the backend matplotlib is using in your system. It's recommended to maximize the plot window to have a better look at it.
+
+### Test for two mean
 
 ### Visualizing test
 
