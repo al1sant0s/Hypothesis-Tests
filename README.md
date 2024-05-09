@@ -3,7 +3,7 @@
 
 ## About
 
-Inspired by R functions: t.test, var.test and prop.test; this python package allows you to perform some basic hypothesis tests. Right now there are 6 types of
+Inspired by R functions, this python package allows you to perform some basic hypothesis tests. Right now there are 6 types of
 tests available, they are:
 
 * One sample tests
@@ -104,9 +104,9 @@ This object will have many attributes and methods. Bellow are listed **only** th
      computes power of test for values passed through v1 parameter.
      * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
      * show: if set to True, it will print a table built from prettytable with results.
-     * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
-     * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+     * align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+     * border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
+     * **kwargs: additional keywords for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
      
      It returns a numpy array with the powers calculated for each v1 value.
 
@@ -114,9 +114,9 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * show: if set to True, it will print a table built from prettytable with results.
      * minimal: if set to True, it will print less information, otherwise it will print all info available for the test.
        Set this parameter to true if you wish to have different kinds of tests with same standard tables.
-     * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
-     * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+     * align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+     * border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
+     * **kwargs: additional keywords for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
    
     It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
 
@@ -324,4 +324,4 @@ two_prop_test.plot_test(show_values = False) #test statistic and critical value 
 
 ## Conclusion
 
-These were the hypothesis tests in this python package.
+These are all hypothesis tests available in this package. More features might be added in the future.
