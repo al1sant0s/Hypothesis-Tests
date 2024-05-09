@@ -90,7 +90,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
 * Attributes available for all test objects:
    * sig: significance level of the test.
    * ts: test statistic value of the test.
-   * v0: parameter value under null hypothesis.
+   * v0: value under null hypothesis.
    * alternative: type of alternative hypothesis being used (left, right or bilateral).
    * description: a short description about the test.
    * sampling_estimates: this will be a dictonary with specific statistic values for the test.
