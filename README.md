@@ -154,7 +154,7 @@ sample02 = rng.normal(4.6, 6, 25)
 
 ### Test for one mean
 
-Test if the mean of the population where sample01 was taken from is equal to 5 or not,
+Test if the mean of the population 01 where sample01 was taken from is equal to 5 or not,
 using 0.05 significance level. We have this test then:
 
 $$
@@ -230,6 +230,98 @@ powers = two_mean_test.power([-5,-4,-3,-2,-1]) # print power table and get the p
 
 print(powers) # print the powers
 ```
+
+### Test for one variance
+
+Test if the variance of the population 01 where sample01 was taken from is greater than 36,
+using 0.08 significance level. We have this test then:
+
+$$
+   \begin{cases}
+      \mathscr{H}_0: \sigma^2 = 36\\
+      \mathscr{H}_1: \sigma^2 > 36
+   \end{cases}
+$$
+
+Doing the test now.
+```{python}
+one_var_test = hypotest.HypoVarTest(x = sample01, sigma_sqr0 = 36, sig = 0.08, alternative = "right")
+
+print("\n--- Test for one variance done! Results presented bellow. ---\n")
+one_var_test.summarize(minimal = True) # See the results
+
+one_var_test.plot_test(colors = {"pdf": "purple", "ts": "orange", "cr": "yellow", "pv": "cyan", "bl": "black"}) # plot the test using a different color scheme
+one_var_test.plot_power(np.linspace(36, 100, 1000))
+```
+
+### Test for two variances
+
+Test if the variances of the population 01 and 02 where sample01 and sample 02 were taken from are equal,
+using the default 0.05 significance level. We have this test then:
+
+$$
+   \begin{cases}
+      \mathscr{H}_0: \frac{\sigma_1^2}{\sigma_2^2} = 1\\
+      \mathscr{H}_1: \frac{\sigma_1^2}{\sigma_2^2} \neq 1
+   \end{cases}
+$$
+
+Doing the test now.
+```{python}
+two_var_test = hypotest.HypoVarTest(x = sample01, y = sample02, sigma_sqr0 = 1)
+
+print("\n--- Test for two variances done! Results presented bellow. ---\n")
+two_var_test.summarize(minimal = True) # See the results
+
+two_var_test.plot_test(lw = 5) # Plot test
+```
+
+### Test for one proportion
+
+Test if proportion of a population is 0.4 knowing that a sample of size 250 with a
+sampling proportion of 0.43 was collected. We have this test then:
+
+$$
+   \begin{cases}
+      \mathscr{H}_0: \pi = 0.4\\
+      \mathscr{H}_1: \pi \neq 0.4
+   \end{cases}
+$$
+
+Doing the test now.
+```{python}
+one_prop_test = hypotest.HypoPropTest(P = 0.43, n = 250, pi0 = 0.4)
+
+print("\n--- Test for one proportion done! Results presented bellow. ---\n")
+one_prop_test.summarize() # See the results
+
+one_prop_test.plot_test()
+```
+
+### Test for two proportions
+
+
+Test if proportions of two populations are equal  knowing that a sample of size 250 with a
+sampling proportion of 0.43 was collected from the first population and another sample of size 300 with a sampling proportion
+of 0.5 was collected from the second population. Use 0.1 as the significance level. We have this test then:
+
+$$
+   \begin{cases}
+      \mathscr{H}_0: \pi_1 - \pi_2 = 0\\
+      \mathscr{H}_1: \pi_1 - \pi_2 \neq 0
+   \end{cases}
+$$
+
+Doing the test now.
+```{python}
+two_prop_test = hypotest.HypoProp02Test(p1 = 0.43, p2 = 0.5, n1 = 250, n2 = 300, pi0 = 0, sig = 0.1)
+
+print("\n--- Test for two proportions done! Results presented bellow. ---\n")
+one_prop_test.summarize() # See the results
+
+two_prop_test.plot_test()
+```
+
 
 ### Visualizing test
 
