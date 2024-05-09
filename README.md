@@ -49,8 +49,8 @@ To perform a test, call one of the 4 classes mentioned before and pass the argum
 
 ### `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
 Used to perform tests for mean(s) using one or two samples.
-   * x: the first sample for the test. It can be a list of a numpy array.
-   * y (optional): The second sample for the test. It can be a list of a numpy array.
+   * x: the first sample for the test. It can be a list or a numpy array.
+   * y (optional): The second sample for the test. It can be a list or a numpy array.
    * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
      this is the difference between the means.
    * sig: the significance level used for this test.
@@ -59,8 +59,8 @@ Used to perform tests for mean(s) using one or two samples.
 
 ### `HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")`
 Used to perform tests for variance(s) using one or two samples.
-   * x: the first sample for the test. It can be a list of a numpy array.
-   * y (optional): The second sample for the test. It can be a list of a numpy array.
+   * x: the first sample for the test. It can be a list or a numpy array.
+   * y (optional): The second sample for the test. It can be a list or a numpy array.
    * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
      this is the ratio between the variances.
    * sig: the significance level used for this test.
