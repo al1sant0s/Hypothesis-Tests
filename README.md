@@ -45,8 +45,7 @@ Each test is built from a specific class. Bellow are listed the classes used to 
 Also there is one special class called Hypotest. `Hypotest` class does not perform any test.
 It just serves as the base class used to construct the classes above. **You will never need to interact directly with this class.**
 
-To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters you need to pass
-to them are described bellow.
+To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters they accept are described bellow.
 
 ### `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
 Used to perform tests for mean(s) using one or two samples.
