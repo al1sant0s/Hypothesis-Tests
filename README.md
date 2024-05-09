@@ -317,13 +317,11 @@ Doing the test now.
 two_prop_test = hypotest.HypoProp02Test(p1 = 0.43, p2 = 0.5, n1 = 250, n2 = 300, pi0 = 0, sig = 0.1)
 
 print("\n--- Test for two proportions done! Results presented bellow. ---\n")
-one_prop_test.summarize() # See the results
+two_prop_test.summarize() # See the results
 
-two_prop_test.plot_test()
+two_prop_test.plot_test(show_values = False) #test statistic and critical value are too close, so we omit these values from the plot
 ```
 
+## Conclusion
 
-### Visualizing test
-
-these general
-attributes and methods that are available for all classes
+These were the hypothesis tests in this python package.
