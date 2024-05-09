@@ -81,7 +81,7 @@ to them are listed bellow:
       * sig: the significance level used for this test.
       * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
-An object of `Hypotest` class will be returned.
+For any of these, an object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
 
 * Attributes available for all test objects:
@@ -133,6 +133,14 @@ This object will have many attributes and methods. Bellow are listed **only** th
    * `plot_power(self, v1, lw = 3)` will make a plot of the power (power curve) for each value passed through v1.
      * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
       * lw: control the linewidth of the lines of the plot.
+
+With all of this out of the way, now let's jump into action with some examples of usage.
+
+## Usage
+
+### Summarize test
+
+### Visualizing test
 
 these general
 attributes and methods that are available for all classes
