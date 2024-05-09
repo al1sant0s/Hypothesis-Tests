@@ -63,7 +63,9 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * v1: a single or sequence of values for power to be computed from.
      * show: if set to True, it will print a table built from Prettytable with results.
      * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * 
+     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table.
+     * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+     It returns a numpy array with the powers calculated for each v1 value.
 
 these general
 attributes and methods that are available for all classes
