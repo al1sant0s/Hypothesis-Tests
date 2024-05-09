@@ -60,7 +60,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
 * Methods available for all test objects:
    * `power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)`
      computes power of test for values passed through v1 parameter.
-     * v1: a single or sequence of values for power to be computed from.
+     * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
      * show: if set to True, it will print a table built from prettytable with results.
      * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
      * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
@@ -88,8 +88,13 @@ This object will have many attributes and methods. Bellow are listed **only** th
        * `"cr": red` color of the critical region.
        * `"pv": "purple"` color used to fill pvalue area.
        * `"bl": "black"` color of the bottom line.
+       
        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
+       
+   * `plot_power(self, v1, lw = 3)` will make a plot of the power (power curve) for each value passed through v1.
+     * v1: a single or sequence of values for power to be computed from. These are all values under alternative hypothesis.
+      * lw: control the linewidth of the lines of the plot.
 
 these general
 attributes and methods that are available for all classes
