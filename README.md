@@ -147,16 +147,37 @@ In the examples bellow we will use these samples.
 import numpy as np
 import Hypothesis.hypotest as hypotest
 
-sample01 = np.array([7, 9, 6, 11, 13, 8, 7, 13, 12, 9])
-sample02 = np.array([12, 8, 9, 13, 14, 9, 8, 10, 7, 15])
+rng = np.random.default_rng(1)
+sample01 = rng.normal(5, 6, 25)
+sample02 = rng.normal(4.6, 6, 25)
 ```
 
 ### Test for one mean
 
-Test if the mean of the population where sample01 was taken from is equal to 9 or not,
-using 0.05 significance.
+Test if the mean of the population where sample01 was taken from is equal to 5 or not,
+using 0.05 significance. We have this test then:
 
-`{python} one_mean_test = hypotest.HypoTstudTest(x = sample01, sig = 0.05, alternative = "bilateral")`
+$$
+   \begin{cases}
+      \mathscr{H}_0: \mu = 5\\
+      \mathscr{H}_1: \mu \neq 5
+   \end{cases}
+$$
+
+Now doing the test.
+```{python}
+one_mean_test = hypotest.HypoTstudTest(x = sample01, mu_0 = 5, sig = 0.05, alternative = "bilateral")
+print("Test for one mean done! Results presented bellow.")
+one_mean_test.summarize() # See the results
+```
+
+Print a compact table setting minimal to True, using a different border style.
+```{python}
+print("Print the same table with less information with a different appearance.")
+one_mean_test.summarize(minimal = True, border_style = "SINGLE_BORDER") # See the results
+```
+
+
 
 ### Summarize test
 
