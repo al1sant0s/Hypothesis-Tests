@@ -61,11 +61,20 @@ This object will have many attributes and methods. Bellow are listed **only** th
    * `power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)`
      computes power of test for values passed through v1 parameter. Each argument is explained bellow.
      * v1: a single or sequence of values for power to be computed from.
-     * show: if set to True, it will print a table built from Prettytable with results.
+     * show: if set to True, it will print a table built from prettytable with results.
      * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table.
+     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
      * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+     
      It returns a numpy array with the powers calculated for each v1 value.
+
+  * `summarize(self, show = True, minimal = False, align = "l", border_style = "DOUBLE_BORDER", **kwargs)` assembles information from the test.
+     * show: if set to True, it will print a table built from prettytable with results.
+     * minimal: if set to True, it will print less information, otherwise it will print all info available for the test.
+       Set this parameter to true if you wish to have different kinds of tests with same standard tables.
+     * align: this parameter is from `Prettytable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+     * border_style: this parameter is from `Prettytable` class and it determines the border style of the table. Any border style supported from prettytable can be passed as a string.
+     * **kwargs: additional keywords for `Prettytable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
 
 these general
 attributes and methods that are available for all classes
