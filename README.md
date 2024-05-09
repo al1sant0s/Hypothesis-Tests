@@ -47,15 +47,39 @@ It just serves as the base class used to construct the classes above. **You will
 
 To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters you need to pass
 to them are listed bellow:
+
    * `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
       * x: the first sample for the test. It can be a list of a numpy array.
       * y (optional): The second sample for the test. It can be a list of a numpy array.
       * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
         this is the difference between the means.
-     * sig: the significance level.
-     * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
-     * var_equal (only used for two samples tests): indicates if the two samples are taken from two populations with the same variance.
+      * sig: the significance level used for this test.
+      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+      * var_equal (only used for two samples tests): indicates whether the two samples are taken from two populations with the same variance.
 
+   * `HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")`
+      * x: the first sample for the test. It can be a list of a numpy array.
+      * y (optional): The second sample for the test. It can be a list of a numpy array.
+      * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
+        this is the ratio between the variances.
+      * sig: the significance level used for this test.
+      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+
+   * `HypoPropTest(self, P, n, pi0, sig = 0.05, alternative = "bilateral")`
+      * P: the sample proportion.
+      * n: the size of the sample which the P proportion was taken from.
+      * pi0: this represents the value under null hypothesis. The true value of the proportion in the population.
+      * sig: the significance level used for this test.
+      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+    
+   * `HypoProp02Test(self, p1, p2, n1, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
+      * p1: the sample 01 proportion.
+      * p2: the sample 02 proportion.
+      * n1: the size of the sample 01 which the p1 proportion was taken from.
+      * n2: the size of the sample 02 which the p1 proportion was taken from.
+      * pi0: this represents the value under null hypothesis. The value of the difference between the two proportions in the populations.
+      * sig: the significance level used for this test.
+      * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
 An object of `Hypotest` class will be returned.
 This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
@@ -99,7 +123,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
        * `"pdf": "black` color of the probability density function (curve).
        * `"ts": "blue"` color of the dashed line that indicates the test statistic position.
-       * `"cr": red` color of the critical region.
+       * `"cr": "red"` color of the critical region.
        * `"pv": "purple"` color used to fill pvalue area.
        * `"bl": "black"` color of the bottom line.
        
