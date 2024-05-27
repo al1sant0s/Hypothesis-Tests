@@ -142,7 +142,7 @@ With all of this out of the way, we can now check some examples of usage.
 ## Usage
 
 In the examples bellow we will use these samples.
-```{python}
+```python
 import numpy as np
 import Hypothesis.hypotest as hypotest
 
@@ -164,7 +164,7 @@ $$
 $$
 
 Now doing the test.
-```{python}
+```python
 one_mean_test = hypotest.HypoTstudTest(x = sample01, mu_0 = 5, sig = 0.05, alternative = "bilateral")
 
 print("\n--- Test for one mean done! Results presented bellow. ---\n")
@@ -172,12 +172,12 @@ one_mean_test.summarize() # See the results
 ```
 
 Print a compact table setting minimal to True, using a different border style.
-```{python}
+```python
 print("\n--- Print the same table with less information and with a different appearance. ---\n")
 one_mean_test.summarize(minimal = True, border_style = "SINGLE_BORDER") # See the results
 ```
-We can choose to not print the table and only get the results instead.
-```{python}
+We can choose not to print the table and only get the results instead.
+```python
 results = one_mean_test.summarize(show = False, minimal = True, border_style = "SINGLE_BORDER") # Get the results
 
 # Check pvalue using both the class attribute and the results (the 6th line of the table is where pvalue appear so we use 5 as index).
@@ -188,7 +188,7 @@ print(results)
 ```
 Finally, we can visualize the test using matplotlib plots.
 
-```{python}
+```python
 one_mean_test.plot_test() # visualize test
 ```
 
@@ -207,7 +207,7 @@ $$
 $$
 
 Now doing the test.
-```{python}
+```python
 # We use var_equal = True because we know the samples were taken from 2 populations with same variance.
 two_mean_test = hypotest.HypoTstudTest(x = sample01, y = sample02, mu_0 = 0, sig = 0.07, alternative = "left", var_equal = True)
 
@@ -219,12 +219,12 @@ two_mean_test.plot_test(show_pvalue = True) # now plot the test showing pvalue a
 ```
 
 Now we will plot a power curve for this test.
-```{python}
+```python
 two_mean_test.plot_power(np.linspace(-10,2,100), lw = 5) # plot power curve with a thicker linewidth
 ```
 
 We can also print a table of power for a few selected values under alternative hypothesis.
-```{python}
+```python
 powers = two_mean_test.power([-5,-4,-3,-2,-1]) # print power table and get the powers into powers variable
 
 print(powers) # print the powers
@@ -243,7 +243,7 @@ $$
 $$
 
 Doing the test now.
-```{python}
+```python
 one_var_test = hypotest.HypoVarTest(x = sample01, sigma_sqr0 = 36, sig = 0.08, alternative = "right")
 
 print("\n--- Test for one variance done! Results presented bellow. ---\n")
@@ -288,7 +288,7 @@ $$
 $$
 
 Doing the test now.
-```{python}
+```python
 one_prop_test = hypotest.HypoPropTest(P = 0.43, n = 250, pi0 = 0.4)
 
 print("\n--- Test for one proportion done! Results presented bellow. ---\n")
@@ -312,7 +312,7 @@ $$
 $$
 
 Doing the test now.
-```{python}
+```python
 two_prop_test = hypotest.HypoProp02Test(p1 = 0.43, p2 = 0.5, n1 = 250, n2 = 300, pi0 = 0, sig = 0.1)
 
 print("\n--- Test for two proportions done! Results presented bellow. ---\n")
