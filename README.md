@@ -266,7 +266,7 @@ $$
 $$
 
 Doing the test now.
-```{python}
+```python
 two_var_test = hypotest.HypoVarTest(x = sample01, y = sample02, sigma_sqr0 = 1)
 
 print("\n--- Test for two variances done! Results presented bellow. ---\n")
