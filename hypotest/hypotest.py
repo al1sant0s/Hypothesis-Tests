@@ -86,7 +86,7 @@ class Hypotest:
         return results
 
 
-    def plot_test(self, show_values = True, show_pvalue = False, lw = 3, colors = {}):
+    def plot_test(self, show_values = True, show_pvalue = False, lw = 2, colors = {}):
 
         fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
 
@@ -94,7 +94,7 @@ class Hypotest:
         x = np.linspace(self.rv.ppf(xoffset), self.rv.ppf(1 - xoffset), int(1/xoffset))
         y = self.rv.pdf(x)
 
-        true_colors = {"pdf": "black", "ts": "blue", "cr": "red", "pv": "purple", "bl": "black"}
+        true_colors = {"pdf": "#696969", "ts": "#D2B48C", "cr": "#F08080", "pv": "#FFE4C4", "bl": "#696969"}
         true_colors.update(colors)
 
         show_cr = False
@@ -138,19 +138,20 @@ class Hypotest:
 
         if(show_values):
             ax.xaxis.set_major_locator(ticker.FixedLocator(np.hstack([self.cv, self.ts])))
+            ax.secondary_xaxis(location = 0.03)
 
         ax.set_xlim(x.min(), x.max())
         plt.show()
 
 
-    def plot_power(self, v1, lw = 3):
+    def plot_power(self, v1, lw = 2, color = "#4682B4"):
 
         fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
 
         x = np.array(v1)
         y = self.power(v1, show = False)
 
-        ax.plot(x, y, linewidth = lw, linestyle="solid")
+        ax.plot(x, y, linewidth = lw, linestyle="solid", color = color)
 
         ax.set_xlabel(r"Values under $\mathscr{H}_1$")  # Add an x-label to the axes.
         ax.set_ylabel(r'$1 - \beta$')  # Add a y-label to the axes.
