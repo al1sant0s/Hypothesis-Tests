@@ -242,7 +242,7 @@ one_var_test = hypotest.HypoVarTest(x = sample01, sigma_sqr0 = 36, sig = 0.08, a
 print("\n--- Test for one variance done! Results presented bellow. ---\n")
 one_var_test.summarize(minimal = True) # See the results
 
-one_var_test.plot_test(colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#B22222", "pv": "#7FFF00", "bl": "#4B0082"}) # plot the test using a different color scheme
+one_var_test.plot_test(fill_pvalue = True, colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#BA55D3", "pv": "#7FFF00", "bl": "#4B0082"}) # plot the test using a different color scheme
 one_var_test.plot_power(np.linspace(36, 100, 1000))
 ```
 
