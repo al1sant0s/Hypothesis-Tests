@@ -112,7 +112,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
    
     It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
 
-  * `plot_test(self, show_values = True, fill_pvalue = False, lw = 3, colors = {})` will make a plot of the test itself.
+  * `plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})` will make a plot of the test itself.
      * show_values: if set to True, it will show critical values and the test statistic value on x axis, otherwise it will let matplotlib choose the x axis marks (ticks).
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
@@ -126,7 +126,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
        
-   * `plot_power(self, v1, lw = 3)` will make a plot of the power (power curve) for each value passed through v1.
+   * `plot_power(self, v1, lw = 2)` will make a plot of the power (power curve) for each value passed through v1.
      * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
       * lw: control the linewidth of the lines of the plot.
 
