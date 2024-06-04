@@ -113,7 +113,8 @@ This object will have many attributes and methods. Bellow are listed **only** th
     It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
 
   * `plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})` will make a plot of the test itself.
-     * show_values: if set to True, it will show critical values and the test statistic value on x axis, otherwise it will let matplotlib choose the x axis marks (ticks).
+     * show_values: if set to True, it will attempt to show critical values on x axis and the test statistic value inside the curve (it depends on the space available),
+       otherwise it will let matplotlib choose the x axis marks (ticks).
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
      * colors: this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
