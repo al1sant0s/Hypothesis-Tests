@@ -116,7 +116,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * show_values: if set to True, it will show critical values and the test statistic value on x axis, otherwise it will let matplotlib choose the x axis marks (ticks).
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
-     * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
+     * colors: this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
        * `"pdf": "#8c8c8c"` color of the probability density function (curve).
        * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
        * `"cr": "#F08080"` color of the critical region.
@@ -242,7 +242,7 @@ one_var_test = hypotest.HypoVarTest(x = sample01, sigma_sqr0 = 36, sig = 0.08, a
 print("\n--- Test for one variance done! Results presented bellow. ---\n")
 one_var_test.summarize(minimal = True) # See the results
 
-one_var_test.plot_test(colors = {"pdf": "purple", "ts": "orange", "cr": "yellow", "pv": "cyan", "bl": "black"}) # plot the test using a different color scheme
+one_var_test.plot_test(colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#B22222", "pv": "#7FFF00", "bl": "#4B0082"}) # plot the test using a different color scheme
 one_var_test.plot_power(np.linspace(36, 100, 1000))
 ```
 
@@ -311,7 +311,7 @@ two_prop_test = hypotest.HypoPropTest(p1 = 0.43, n1 = 250, p2 = 0.5, n2 = 300, p
 print("\n--- Test for two proportions done! Results presented bellow. ---\n")
 two_prop_test.summarize() # See the results
 
-two_prop_test.plot_test(show_values = False) #test statistic and critical value are too close, so we omit these values from the plot
+two_prop_test.plot_test()
 ```
 
 ## Conclusion
