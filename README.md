@@ -117,11 +117,19 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
      * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
+<<<<<<< HEAD
        * `"pdf": "#8c8c8c"` color of the probability density function (curve).
        * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
        * `"cr": "#F08080"` color of the critical region.
        * `"pv": "#FFE4C4"` color used to fill pvalue area.
        * `"bl": "#696969"` color of the bottom line.
+=======
+       * `"pdf": "black"` color of the probability density function (curve).
+       * `"ts": "blue"` color of the dashed line that indicates the test statistic position.
+       * `"cr": "red"` color of the critical region.
+       * `"pv": "purple"` color used to fill pvalue area.
+       * `"bl": "black"` color of the bottom line.
+>>>>>>> 20c073ca7afaa32411033ae355680458cb885a74
        
        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
