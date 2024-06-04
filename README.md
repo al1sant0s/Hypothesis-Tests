@@ -126,7 +126,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
        
-   * `plot_power(self, v1, lw = 2, color = "#4682B4") will make a plot of the power (power curve) for each value passed through v1.
+   * `plot_power(self, v1, lw = 2, color = "#4682B4")` will make a plot of the power (power curve) for each value passed through v1.
         * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
         * lw: control the linewidth of the lines of the plot.
         * color: specify the color of the curve.
