@@ -119,9 +119,9 @@ This object will have many attributes and methods. Bellow are listed **only** th
    
     It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
 
-  * `plot_test(self, show_values = True, show_pvalue = False, lw = 3, colors = {})` will make a plot of the test itself.
+  * `plot_test(self, show_values = True, fill_pvalue = False, lw = 3, colors = {})` will make a plot of the test itself.
      * show_values: if set to True, it will show critical values and the test statistic value on x axis, otherwise it will let matplotlib choose the x axis marks (ticks).
-     * show_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
+     * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
      * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
        * `"pdf": "black` color of the probability density function (curve).
@@ -215,7 +215,7 @@ print("\n--- Test for two means done! Results presented bellow. ---\n")
 two_mean_test.summarize() # See the results
 
 two_mean_test.plot_test() # plot the test without showing pvalue area
-two_mean_test.plot_test(show_pvalue = True) # now plot the test showing pvalue area
+two_mean_test.plot_test(fill_pvalue = True) # now plot the test showing pvalue area
 ```
 
 Now we will plot a power curve for this test.
