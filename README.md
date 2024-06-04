@@ -243,8 +243,10 @@ print("\n--- Test for one variance done! Results presented bellow. ---\n")
 one_var_test.summarize(minimal = True) # See the results
 
 # plot the test using a different color scheme
-one_var_test.plot_test(fill_pvalue = True, colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#BA55D3", "pv": "#7FFF00", "bl": "#4B0082"})
-one_var_test.plot_power(np.linspace(36, 100, 1000))
+one_var_test.plot_test(fill_pvalue = True, colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#BA55D3", "pv": "#7FFF00", "bl": "#4B0082"}) # with pvalue
+one_var_test.plot_test(colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#BA55D3", "pv": "#7FFF00", "bl": "#4B0082"}) # without pvalue
+
+one_var_test.plot_power(np.linspace(36, 100, 1000), color = "orange")
 ```
 
 ### Test for two variances
