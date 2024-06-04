@@ -86,7 +86,7 @@ class Hypotest:
         return results
 
 
-    def plot_test(self, show_values = True, show_pvalue = False, lw = 2, colors = {}):
+    def plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {}):
 
         fig, ax = plt.subplots(layout="constrained")  # a figure with a single Axes
 
@@ -94,13 +94,13 @@ class Hypotest:
         x = np.linspace(self.rv.ppf(xoffset), self.rv.ppf(1 - xoffset), int(1/xoffset))
         y = self.rv.pdf(x)
 
-        true_colors = {"pdf": "#696969", "ts": "#D2B48C", "cr": "#F08080", "pv": "#FFE4C4", "bl": "#696969"}
+        true_colors = {"pdf": "#8c8c8c", "ts": "#D2B48C", "cr": "#F08080", "pv": "#FFE4C4", "bl": "#696969"}
         true_colors.update(colors)
 
         show_cr = False
 
         # Show rejection region only if pvalue is smaller than significance
-        if(not(show_pvalue) or self.pvalue < self.sig):
+        if(not(fill_pvalue) or self.pvalue < self.sig):
             show_cr = True
             if(self.alternative == "bilateral"):
                 include = np.logical_or(x <= self.cv.min(), x >= self.cv.max())
@@ -112,7 +112,7 @@ class Hypotest:
                 include = (x >= self.cv)
                 ax.fill_between(x, 0, y, where = include, color = true_colors["cr"], label = "Rejection region")
 
-        if(show_pvalue):
+        if(fill_pvalue):
             if(self.alternative == "bilateral"):
                 include = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
                 include = np.logical_or(x <= include.min(), x >= include.max())
@@ -137,8 +137,43 @@ class Hypotest:
         ax.set_title(f"{self.description} " + rf"$(\alpha = {self.sig})$" + f"\n{self.distribution}")
 
         if(show_values):
-            ax.xaxis.set_major_locator(ticker.FixedLocator(np.hstack([self.cv, self.ts])))
-            ax.secondary_xaxis(location = 0.03)
+            ax.xaxis.set_major_locator(ticker.FixedLocator(self.cv))
+            crop_distance = np.min(np.array([self.ts - x.min(), x.max() - self.ts]))
+            crop_offset = 0.2
+            if(crop_distance > crop_offset * (x.max() - x.min())):
+                if(self.alternative == "left"):
+                    ax.text(self.ts, self.rv.pdf(self.ts)/2, f"{self.ts:.4f}", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                            rotation = "vertical", horizontalalignment = "right", verticalalignment = "center", fontsize = "large", fontstyle = "italic")
+                    if(fill_pvalue):
+                        xpos = self.ts - crop_offset * crop_distance
+                        ypos = np.min(self.rv.pdf(np.array([self.ts, xpos])))/2
+                        ax.text(xpos, ypos, f"{(self.pvalue*100):.2f}%", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                                rotation = "horizontal", horizontalalignment = "center", verticalalignment = "bottom", fontsize = "large", fontstyle = "italic")
+                elif(self.alternative == "right"):
+                    ax.text(self.ts, self.rv.pdf(self.ts)/2, f"{self.ts:.4f}", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                            rotation = "vertical", horizontalalignment = "right", verticalalignment = "center", fontsize = "large", fontstyle = "italic")
+                    if(fill_pvalue):
+                        xpos = self.ts + crop_offset * crop_distance
+                        ypos = np.min(self.rv.pdf(np.array([self.ts, xpos])))/2
+                        ax.text(xpos, ypos, f"{(self.pvalue*100):.2f}%", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                                rotation = "horizontal", horizontalalignment = "center", verticalalignment = "bottom", fontsize = "large", fontstyle = "italic")
+                else:
+                    side = -1 if self.ts - x.min() < x.max() - self.ts else 1
+                    ax.text(self.ts, self.rv.pdf(self.ts)/2, f"{self.ts:.4f}", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                            rotation = "vertical", horizontalalignment = "right", verticalalignment = "center", fontsize = "large", fontstyle = "italic")
+                    if(fill_pvalue):
+                        xrange = self.rv.ppf([self.pvalue/2, 1 - self.pvalue/2])
+                        xpos = np.min(xrange) - crop_offset * crop_distance
+                        ypos = np.min(self.rv.pdf(xpos))/2
+                        ax.text(xpos, ypos, f"{(self.pvalue*50):.2f}%", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                                rotation = "horizontal", horizontalalignment = "center", verticalalignment = "bottom", fontsize = "large", fontstyle = "italic")
+                        xpos = np.max(xrange) + crop_offset * crop_distance
+                        ypos = np.min(self.rv.pdf(xpos))/2
+                        ax.text(xpos, ypos, f"{(self.pvalue*50):.2f}%", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
+                                rotation = "horizontal", horizontalalignment = "center", verticalalignment = "bottom", fontsize = "large", fontstyle = "italic")
+            else:
+                ax.xaxis.set_major_locator(ticker.AutoLocator())
+
 
         ax.set_xlim(x.min(), x.max())
         plt.show()
