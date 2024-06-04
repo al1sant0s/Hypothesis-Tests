@@ -66,7 +66,7 @@ Used to perform tests for variance(s) using one or two samples.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
     
-### `HypoPropTest(self, p1, n1, p2, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
+### `HypoPropTest(self, p1, n1, p2 = None, n2 = None, pi0 = 0, sig = 0.05, alternative = "bilateral")`
 Used to perform tests for one or two proportions.
    * p1: the sample 01 proportion.
    * n1: the size of the sample 01 which the p1 proportion was taken from.
