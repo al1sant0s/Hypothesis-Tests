@@ -136,6 +136,7 @@ class Hypotest:
 
         ax.set_title(f"{self.description} " + rf"$(\alpha = {self.sig})$" + f"\n{self.distribution}")
 
+        # Show values of the test in the plot or display a generic x axis.
         if(show_values):
             ax.xaxis.set_major_locator(ticker.FixedLocator(self.cv))
             crop_distance = np.min(np.array([self.ts - x.min(), x.max() - self.ts]))

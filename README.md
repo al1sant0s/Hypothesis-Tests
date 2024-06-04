@@ -39,13 +39,13 @@ Each test is built from a specific class. Bellow are listed the classes used to 
 
 * `HypoTstudTest` class performs tests for mean(s) using one or two samples.
 * `HypoVarTest` class performs tests for variance(s) using one or two samples.
-* `HypoPropTest` class performs tests for one proportion.
-* `HypoProp02Test` class performs tests for two proportions.
+* `HypoPropTest` class performs tests for proportion(s) using one proportion and one sample size
+or two proportions and two sample sizes.
 
 Also there is one special class called Hypotest. `Hypotest` class does not perform any test.
 It just serves as the base class used to construct the classes above. **You will never need to interact directly with this class.**
 
-To perform a test, call one of the 4 classes mentioned before and pass the arguments needed for them. The parameters they accept are described bellow.
+To perform a test, call one of the 3 classes mentioned before and pass the arguments needed for them. The parameters they accept are described bellow.
 
 ### `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
 Used to perform tests for mean(s) using one or two samples.
@@ -65,22 +65,15 @@ Used to perform tests for variance(s) using one or two samples.
      this is the ratio between the variances.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
-
-### `HypoPropTest(self, P, n, pi0, sig = 0.05, alternative = "bilateral")`
-Used to perform tests for one proportion.
-   * P: the sample proportion.
-   * n: the size of the sample which the P proportion was taken from.
-   * pi0: this represents the value under null hypothesis. The true value of the proportion in the population.
-   * sig: the significance level used for this test.
-   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
     
-### `HypoProp02Test(self, p1, p2, n1, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
-Used to perform tests for two proportions.
+### `HypoPropTest(self, p1, n1, p2, n2, pi0 = 0, sig = 0.05, alternative = "bilateral")`
+Used to perform tests for one or two proportions.
    * p1: the sample 01 proportion.
-   * p2: the sample 02 proportion.
    * n1: the size of the sample 01 which the p1 proportion was taken from.
+   * p2: the sample 02 proportion.
    * n2: the size of the sample 02 which the p2 proportion was taken from.
-   * pi0: this represents the value under null hypothesis. The value of the difference between the two proportions in the populations.
+   * pi0: this represents the value under null hypothesis. For one proportion test this is the true value of the proportion in the population.
+     For two proportions test this is the value of the difference between the two proportions in the populations.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
@@ -124,11 +117,11 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
      * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
-       * `"pdf": "black` color of the probability density function (curve).
-       * `"ts": "blue"` color of the dashed line that indicates the test statistic position.
-       * `"cr": "red"` color of the critical region.
-       * `"pv": "purple"` color used to fill pvalue area.
-       * `"bl": "black"` color of the bottom line.
+       * `"pdf": "#8c8c8c"` color of the probability density function (curve).
+       * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
+       * `"cr": "#F08080"` color of the critical region.
+       * `"pv": "#FFE4C4"` color used to fill pvalue area.
+       * `"bl": "#696969"` color of the bottom line.
        
        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
        The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
@@ -289,7 +282,7 @@ $$
 
 Doing the test now.
 ```python
-one_prop_test = hypotest.HypoPropTest(P = 0.43, n = 250, pi0 = 0.4)
+one_prop_test = hypotest.HypoPropTest(p1 = 0.43, n1 = 250, pi0 = 0.4)
 
 print("\n--- Test for one proportion done! Results presented bellow. ---\n")
 one_prop_test.summarize() # See the results
@@ -313,7 +306,7 @@ $$
 
 Doing the test now.
 ```python
-two_prop_test = hypotest.HypoProp02Test(p1 = 0.43, p2 = 0.5, n1 = 250, n2 = 300, pi0 = 0, sig = 0.1)
+two_prop_test = hypotest.HypoProp02Test(p1 = 0.43, n1 = 250, p2 = 0.5, n2 = 300, pi0 = 0, sig = 0.1)
 
 print("\n--- Test for two proportions done! Results presented bellow. ---\n")
 two_prop_test.summarize() # See the results
