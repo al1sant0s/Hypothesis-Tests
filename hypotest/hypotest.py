@@ -158,7 +158,6 @@ class Hypotest:
                         ax.text(xpos, ypos, f"{(self.pvalue*100):.2f}%", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
                                 rotation = "horizontal", horizontalalignment = "center", verticalalignment = "bottom", fontsize = "large", fontstyle = "italic")
                 else:
-                    side = -1 if self.ts - x.min() < x.max() - self.ts else 1
                     ax.text(self.ts, self.rv.pdf(self.ts)/2, f"{self.ts:.4f}", alpha = 0.5, backgroundcolor = "#ff000000", color = "black",
                             rotation = "vertical", horizontalalignment = "right", verticalalignment = "center", fontsize = "large", fontstyle = "italic")
                     if(fill_pvalue):
