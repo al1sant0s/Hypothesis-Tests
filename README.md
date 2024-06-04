@@ -124,7 +124,7 @@ This object will have many attributes and methods. Bellow are listed **only** th
      * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
      * lw: control the linewidth of the lines of the plot.
      * colors: this dictonary is used to plot the test with different colors than default. Bellow are the keys you can put in this dictonary along with the default colors used.
-       * `"pdf": "black` color of the probability density function (curve).
+       * `"pdf": "black"` color of the probability density function (curve).
        * `"ts": "blue"` color of the dashed line that indicates the test statistic position.
        * `"cr": "red"` color of the critical region.
        * `"pv": "purple"` color used to fill pvalue area.
