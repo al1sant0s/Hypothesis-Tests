@@ -108,8 +108,8 @@ This object will have many attributes and methods. Bellow are listed **only** th
 
 ### Methods available for all test objects:
 
-#### Power
-Computes power of test for values passed through v1 parameter.
+#### power
+Computes power of test for a sequence of values.
 ```python
 power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)
 ```
@@ -122,37 +122,52 @@ Parameteres:
      
 It returns a numpy array with the powers calculated for each v1 value.
 
-  * `summarize(self, show = True, minimal = False, align = "l", border_style = "DOUBLE_BORDER", **kwargs)` assembles information from the test.
-     * show: if set to True, it will print a table built from prettytable with results.
-     * minimal: if set to True, it will print less information, otherwise it will print all info available for the test.
-       Set this parameter to true if you wish to have different kinds of tests with same standard tables.
-     * align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
-     * **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+#### summarize
+Assembles information from the test.
+```python
+summarize(self, show = True, minimal = False, align = "l", border_style = "DOUBLE_BORDER", **kwargs)
+```
+Parameteres:
+* show: if set to True, it will print a table built from prettytable with results.
+* minimal: if set to True, it will print less information, otherwise it will print all info available for the test.
+  Set this parameter to true if you wish to have different kinds of tests with same standard tables.
+* align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+* border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
+* **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
    
-    It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
+It returns a numpy array with the results presented in table in the order they appear (from top to bottom).
 
-  * `plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})` will make a plot of the test itself.
-     * show_values: if set to True, it will attempt to show critical values on x axis and the test statistic value inside the curve (it depends on the space available),
-       otherwise it will let matplotlib choose the x axis marks (ticks).
-     * fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
-     * lw: control the linewidth of the lines of the plot.
-     * colors: this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
-       * `"pdf": "#8c8c8c"` color of the probability density function (curve).
-       * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
-       * `"cr": "#F08080"` color of the critical region.
-       * `"pv": "#FFE4C4"` color used to fill pvalue area.
-       * `"bl": "#696969"` color of the bottom line.
+#### plot_test
+It will create a plot of the test.
+```python
+plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})`
+```
+Parameteres:
+* show_values: if set to True, it will attempt to show critical values on x axis and the test statistic value inside the curve (it depends on the space available),
+  otherwise it will let matplotlib choose the x axis marks (ticks).
+* fill_pvalue: if set to True, it will fill the area associated with the pvalue of the test.
+* lw: control the linewidth of the lines of the plot.
+* colors: this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
+   * `"pdf": "#8c8c8c"` color of the probability density function (curve).
+   * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
+   * `"cr": "#F08080"` color of the critical region.
+   * `"pv": "#FFE4C4"` color used to fill pvalue area.
+   * `"bl": "#696969"` color of the bottom line.
        
-       You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
-       The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
-       
-   * `plot_power(self, v1, lw = 2, color = "#4682B4")` will make a plot of the power (power curve) for each value passed through v1.
-        * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
-        * lw: control the linewidth of the lines of the plot.
-        * color: specify the color of the curve.
-        You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
+You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
+The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
 
+#### plot_power
+It will create a plot of the power (power curve) for a sequence of values.
+```python
+plot_power(self, v1, lw = 2, color = "#4682B4")
+```
+Parameteres:
+* v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
+* lw: control the linewidth of the lines of the plot.
+* color: specify the color of the curve.
+  You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
+  
 With all of this out of the way, we can now check some examples of usage.
 
 ## Usage
