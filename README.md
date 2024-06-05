@@ -126,14 +126,14 @@ It returns a numpy array with the results presented in table in the order they a
 #### plot_test
 It will create a plot of the test.
 ```python
-plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})`
+plot_test(self, show_values = True, fill_pvalue = False, lw = 2, colors = {})
 ```
 Parameteres:
 * **_show_values:_** if set to True, it will attempt to show critical values on x axis and the test statistic value inside the curve (it depends on the space available),
   otherwise it will let matplotlib choose the x axis marks (ticks).
 * **_fill_pvalue:_** if set to True, it will fill the area associated with the pvalue of the test.
 * **_lw:_** control the linewidth of the lines of the plot.
-* colors: this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
+* **_colors:_** this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
    * `"pdf": "#8c8c8c"` color of the probability density function (curve).
    * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
    * `"cr": "#F08080"` color of the critical region.
