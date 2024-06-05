@@ -134,11 +134,11 @@ Parameteres:
 * **_fill_pvalue:_** if set to True, it will fill the area associated with the pvalue of the test.
 * **_lw:_** control the linewidth of the lines of the plot.
 * **_colors:_** this dictonary is used to plot the test with specific colors. Bellow are the keys you can put in this dictonary along with the default colors used.
-   * `"pdf": "#8c8c8c"` color of the probability density function (curve).
-   * `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
-   * `"cr": "#F08080"` color of the critical region.
-   * `"pv": "#FFE4C4"` color used to fill pvalue area.
-   * `"bl": "#696969"` color of the bottom line.
+   * ![pdf](https://placehold.co/15x15/8c8c8c/8c8c8c.png) `"pdf": "#8c8c8c"` color of the probability density function (curve).
+   * ![ts](https://placehold.co/15x15/D2B48C/D2B48C.png) `"ts": "#D2B48C"` color of the dashed line that indicates the test statistic position.
+   * ![cr](https://placehold.co/15x15/F08080/F08080.png) `"cr": "#F08080"` color of the critical region.
+   * ![pv](https://placehold.co/15x15/FFE4C4/FFE4C4.png) `"pv": "#FFE4C4"` color used to fill pvalue area.
+   * ![bl](https://placehold.co/15x15/696969/696969.png) `"bl": "#696969"` color of the bottom line.
        
 You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
 The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
@@ -165,7 +165,7 @@ plot_power(self, v1, lw = 2, color = "#4682B4")
 Parameteres:
 * **_v1:_** a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
 * **_lw:_** control the linewidth of the lines of the plot.
-* **_color:_** specify the color of the curve.
+* **_color:_** specify the color of the curve. If no color is specified, ![power curve default color](https://placehold.co/15x15/4682B4/4682B4.png) will be used.
   You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
   
 With all of this out of the way, we can now check some examples of usage.
