@@ -47,8 +47,13 @@ It just serves as the base class used to construct the classes above. **You will
 
 To perform a test, call one of the 3 classes mentioned before and pass the arguments needed for them. The parameters they accept are described bellow.
 
-### `HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)`
+### Test for mean(s)
 Used to perform tests for mean(s) using one or two samples.
+
+```python
+HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)
+```
+Parameteres:
    * x: the first sample for the test. It can be a list or a numpy array.
    * y (optional): The second sample for the test. It can be a list or a numpy array.
    * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
@@ -57,8 +62,12 @@ Used to perform tests for mean(s) using one or two samples.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
    * var_equal (only used for two samples tests): indicates whether the two samples are taken from two populations with the same variance.
 
-### `HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")`
-Used to perform tests for variance(s) using one or two samples.
+### Test for variance(s)
+Used to perform tests for variance(s) using one or two samples. 
+```python
+HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")
+```
+Parameteres:
    * x: the first sample for the test. It can be a list or a numpy array.
    * y (optional): The second sample for the test. It can be a list or a numpy array.
    * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
@@ -66,8 +75,12 @@ Used to perform tests for variance(s) using one or two samples.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
     
-### `HypoPropTest(self, p1, n1, p2 = None, n2 = None, pi0 = 0, sig = 0.05, alternative = "bilateral")`
+### Test for proportion(s)
 Used to perform tests for one or two proportions.
+```python
+HypoPropTest(self, p1, n1, p2 = None, n2 = None, pi0 = 0, sig = 0.05, alternative = "bilateral")
+```
+Parameteres:
    * p1: the sample 01 proportion.
    * n1: the size of the sample 01 which the p1 proportion was taken from.
    * p2: the sample 02 proportion.
@@ -77,30 +90,37 @@ Used to perform tests for one or two proportions.
    * sig: the significance level used for this test.
    * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
+## Results
 For any of these tests, an object of `Hypotest` class will be returned.
-This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful:
+This object will have many attributes and methods. Bellow are listed **only** the most important attributes and methods that might be useful.
 
-* Attributes available for all test objects:
-   * sig: significance level of the test.
-   * ts: test statistic value of the test.
-   * v0: value under null hypothesis.
-   * alternative: type of alternative hypothesis being used (left, right or bilateral).
-   * description: a short description about the test.
-   * sampling_estimates: this will be a dictonary with specific statistic values for the test.
-   * cv: a numpy array with one or two critical values of the test.
-   * pvalue: the pvalue calculated for the test.
-   * reject: a boolean variable that tells if null hypothesis should be rejected (or not).
+### Attributes available for all test objects:
 
-* Methods available for all test objects:
-   * `power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)`
-     computes power of test for values passed through v1 parameter.
-     * v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
-     * show: if set to True, it will print a table built from prettytable with results.
-     * align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-     * border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
-     * **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+* **sig:** significance level of the test.
+* __ts:__ test statistic value of the test.
+* v0: value under null hypothesis.
+* alternative: type of alternative hypothesis being used (left, right or bilateral).
+* description: a short description about the test.
+* sampling_estimates: this will be a dictonary with specific statistic values for the test.
+* cv: a numpy array with one or two critical values of the test.
+* pvalue: the pvalue calculated for the test.
+* reject: a boolean variable that tells if null hypothesis should be rejected (or not).
+
+### Methods available for all test objects:
+
+#### Power
+Computes power of test for values passed through v1 parameter.
+```python
+power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)
+```
+Parameteres:  
+* v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
+* show: if set to True, it will print a table built from prettytable with results.
+* align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+* border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
+* **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
      
-     It returns a numpy array with the powers calculated for each v1 value.
+It returns a numpy array with the powers calculated for each v1 value.
 
   * `summarize(self, show = True, minimal = False, align = "l", border_style = "DOUBLE_BORDER", **kwargs)` assembles information from the test.
      * show: if set to True, it will print a table built from prettytable with results.
