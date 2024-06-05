@@ -187,6 +187,7 @@ Finally, we can visualize the test using matplotlib plots.
 ```python
 one_mean_test.plot_test() # visualize test
 ```
+![T test plot - one sample](images/Figure_1.png)
 
 The result might vary slightly depending on the backend matplotlib is using in your system. It's recommended to maximize the plot window to have a better look at it.
 
