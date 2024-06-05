@@ -81,14 +81,14 @@ Used to perform tests for one or two proportions.
 HypoPropTest(self, p1, n1, p2 = None, n2 = None, pi0 = 0, sig = 0.05, alternative = "bilateral")
 ```
 Parameteres:
-   * p1: the sample 01 proportion.
-   * n1: the size of the sample 01 which the p1 proportion was taken from.
-   * p2: the sample 02 proportion.
-   * n2: the size of the sample 02 which the p2 proportion was taken from.
-   * pi0: this represents the value under null hypothesis. For one proportion test this is the true value of the proportion in the population.
+   * **p1:** the sample 01 proportion.
+   * **n1:** the size of the sample 01 which the p1 proportion was taken from.
+   * **p2:** the sample 02 proportion.
+   * **n2:** the size of the sample 02 which the p2 proportion was taken from.
+   * **pi0:** this represents the value under null hypothesis. For one proportion test this is the true value of the proportion in the population.
      For two proportions test this is the value of the difference between the two proportions in the populations.
-   * sig: the significance level used for this test.
-   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+   * **sig:** the significance level used for this test.
+   * **alternative:** determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
 ## Results
 For any of these tests, an object of `Hypotest` class will be returned.
@@ -96,31 +96,17 @@ This object will have many attributes and methods. Bellow are listed **only** th
 
 ### Attributes available for all test objects:
 
-* **sig:** significance level of the test.
-* __ts:__ test statistic value of the test.
-* v0: value under null hypothesis.
-* alternative: type of alternative hypothesis being used (left, right or bilateral).
-* description: a short description about the test.
-* sampling_estimates: this will be a dictonary with specific statistic values for the test.
-* cv: a numpy array with one or two critical values of the test.
-* pvalue: the pvalue calculated for the test.
-* reject: a boolean variable that tells if null hypothesis should be rejected (or not).
+* **_sig:_** significance level of the test.
+* **_ts:_** test statistic value of the test.
+* **_v0:_** value under null hypothesis.
+* **_alternative:_** type of alternative hypothesis being used (left, right or bilateral).
+* **_description:_** a short description about the test.
+* **_sampling_estimates:_** this will be a dictonary with specific statistic values for the test.
+* **_cv:_** a numpy array with one or two critical values of the test.
+* **_pvalue:_** the pvalue calculated for the test.
+* **_reject:_** a boolean variable that tells if null hypothesis should be rejected (or not).
 
 ### Methods available for all test objects:
-
-#### power
-Computes power of test for a sequence of values.
-```python
-power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)
-```
-Parameteres:  
-* v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
-* show: if set to True, it will print a table built from prettytable with results.
-* align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
-* border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
-* **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
-     
-It returns a numpy array with the powers calculated for each v1 value.
 
 #### summarize
 Assembles information from the test.
@@ -156,6 +142,20 @@ Parameteres:
        
 You can use any color supported by matplotlib. For more details, check [this](https://matplotlib.org/stable/users/explain/colors/colors.html).
 The keys that you pass will update the colors of the associated components. This means that you don't need to pass all of them, but only the ones you wish to change.
+
+#### power
+Computes power of test for a sequence of values.
+```python
+power(self, v1, show = True, align = 'l', border_style = "DOUBLE_BORDER", **kwargs)
+```
+Parameteres:  
+* v1: a single or sequence of values for power to be computed from. These are all values for the alternative hypothesis.
+* show: if set to True, it will print a table built from prettytable with results.
+* align: this parameter is from `PrettyTable` class and it determines the alignment of the table. You can use 'l' for left, 'c' for centered and 'r' for right alignment.
+* border_style: this parameter is from `PrettyTable` class and it determines the border style of the table. Any border style supported by prettytable can be passed as a string.
+* **kwargs: additional keyword arguments for `PrettyTable`. You can learn more about prettytable [here](https://pypi.org/project/prettytable/).
+     
+It returns a numpy array with the powers calculated for each v1 value.
 
 #### plot_power
 It will create a plot of the power (power curve) for a sequence of values.
