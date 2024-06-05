@@ -222,7 +222,7 @@ Finally, we can visualize the test using matplotlib plots.
 ```python
 one_mean_test.plot_test() # visualize test
 ```
-![T test plot - one sample.](images/Figure_1.png)
+![T test plot - one sample.](images/Figure_01.png)
 
 The result might vary slightly depending on the backend matplotlib is using in your system. It's recommended to maximize the plot window to have a better look at it.
 
@@ -249,14 +249,14 @@ two_mean_test.summarize() # See the results
 two_mean_test.plot_test() # plot the test without showing pvalue area
 two_mean_test.plot_test(fill_pvalue = True) # now plot the test showing pvalue area
 ```
-![T test plot, two samples, without pvalue area filled.](images/Figure_2.png)
-![T test plot, two samples, with pvalue area filled.](images/Figure_3.png)
+![T test plot, two samples, without pvalue area filled.](images/Figure_02.png)
+![T test plot, two samples, with pvalue area filled.](images/Figure_03.png)
 
 Now we will plot a power curve for this test.
 ```python
 two_mean_test.plot_power(np.linspace(-10,2,100), lw = 5) # plot power curve with a thicker linewidth
 ```
-![Power curve in default color (blue color).](images/Figure_4.png)
+![Power curve in default color (blue color).](images/Figure_04.png)
 
 We can also print a table of power for a few selected values under alternative hypothesis.
 ```python
@@ -290,9 +290,9 @@ one_var_test.plot_test(colors = {"pdf": "#FF1493", "ts": "#D8BFD8", "cr": "#BA55
 
 one_var_test.plot_power(np.linspace(36, 100, 1000), color = "orange")
 ```
-![Chi-squared test plot for variance with pvalue area filled and using a diferent colorscheme.](images/Figure_5.png)
-![Chi-squared test plot for variance without pvalue area filled and using a diferent colorscheme.](images/Figure_6.png)
-![Power curve in orange color.](images/Figure_7.png)
+![Chi-squared test plot for variance with pvalue area filled and using a diferent colorscheme.](images/Figure_05.png)
+![Chi-squared test plot for variance without pvalue area filled and using a diferent colorscheme.](images/Figure_06.png)
+![Power curve in orange color.](images/Figure_07.png)
 
 ### Test for two variances
 
@@ -315,7 +315,7 @@ two_var_test.summarize(minimal = True) # See the results
 
 two_var_test.plot_test(lw = 5) # Plot test
 ```
-![F test plot for two variances using linewidth value set to 5.](images/Figure_8.png)
+![F test plot for two variances using linewidth value set to 5.](images/Figure_08.png)
 
 ### Test for one proportion
 
@@ -338,7 +338,7 @@ one_prop_test.summarize() # See the results
 
 one_prop_test.plot_test()
 ```
-![Z test plot for one proportion.](images/Figure_9.png)
+![Z test plot for one proportion.](images/Figure_09.png)
 
 ### Test for two proportions
 
