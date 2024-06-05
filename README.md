@@ -54,13 +54,13 @@ Used to perform tests for mean(s) using one or two samples.
 HypoTstudTest(self, x, y = None, mu_0 = 0, sig = 0.05, alternative = "bilateral", var_equal = False)
 ```
 Parameteres:
-   * x: the first sample for the test. It can be a list or a numpy array.
-   * y (optional): The second sample for the test. It can be a list or a numpy array.
-   * mu_0: this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
+   * **_x:_** the first sample for the test. It can be a list or a numpy array.
+   * **_y:_** the second sample for the test. It can be a list or a numpy array.
+   * **_mu_0:_** this represents the value under null hypothesis. For one sample tests this is the true mean. For two samples tests
      this is the difference between the means.
-   * sig: the significance level used for this test.
-   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
-   * var_equal (only used for two samples tests): indicates whether the two samples are taken from two populations with the same variance.
+   * **_sig:_** the significance level used for this test.
+   * **_alternative:_** determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+   * **_var_equal:_** indicates whether the two samples are taken from two populations with the same variance (only used for two samples tests).
 
 ### Test for variance(s)
 Used to perform tests for variance(s) using one or two samples. 
@@ -68,12 +68,12 @@ Used to perform tests for variance(s) using one or two samples.
 HypoVarTest(self, x, y = None, sigma_sqr0 = 1, sig = 0.05, alternative = "bilateral")
 ```
 Parameteres:
-   * x: the first sample for the test. It can be a list or a numpy array.
-   * y (optional): The second sample for the test. It can be a list or a numpy array.
-   * sigma_sqr0: this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
+   * **_x:_** the first sample for the test. It can be a list or a numpy array.
+   * **_y:_** The second sample for the test. It can be a list or a numpy array.
+   * **_sigma_sqr0:_** this represents the value under null hypothesis. For one sample tests this is the true variance. For two samples tests
      this is the ratio between the variances.
-   * sig: the significance level used for this test.
-   * alternative: determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+   * **_sig:_** the significance level used for this test.
+   * **_alternative:_** determines the direction of the test. The values available are the following: "left", "right", "bilateral".
     
 ### Test for proportion(s)
 Used to perform tests for one or two proportions.
@@ -81,14 +81,14 @@ Used to perform tests for one or two proportions.
 HypoPropTest(self, p1, n1, p2 = None, n2 = None, pi0 = 0, sig = 0.05, alternative = "bilateral")
 ```
 Parameteres:
-   * **p1:** the sample 01 proportion.
-   * **n1:** the size of the sample 01 which the p1 proportion was taken from.
-   * **p2:** the sample 02 proportion.
-   * **n2:** the size of the sample 02 which the p2 proportion was taken from.
-   * **pi0:** this represents the value under null hypothesis. For one proportion test this is the true value of the proportion in the population.
+   * **_p1:_** the sample 01 proportion.
+   * **_n1:_** the size of the sample 01 which the p1 proportion was taken from.
+   * **_p2:_** the sample 02 proportion.
+   * **_n2:_** the size of the sample 02 which the p2 proportion was taken from.
+   * **_pi0:_** this represents the value under null hypothesis. For one proportion test this is the true value of the proportion in the population.
      For two proportions test this is the value of the difference between the two proportions in the populations.
-   * **sig:** the significance level used for this test.
-   * **alternative:** determines the direction of the test. The values available are the following: "left", "right", "bilateral".
+   * **_sig:_** the significance level used for this test.
+   * **_alternative:_** determines the direction of the test. The values available are the following: "left", "right", "bilateral".
 
 ## Results
 For any of these tests, an object of `Hypotest` class will be returned.
