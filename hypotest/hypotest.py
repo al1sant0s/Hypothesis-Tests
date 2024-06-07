@@ -12,7 +12,7 @@ class Hypotest:
         self.distribution = distribution                        # The distribution used in the test
         self.ts = ts                                            # Test statistic
         self.v0 = v0                                            # Parameter value under the null hypothesis
-        self.alternative = alternative                          # Type of alternative being used (left, right or bilateral).
+        self.alternative = alternative                          # Type of alternative being used (left, right or bilateral)
         self.description = description                          # A short description about the test
         self.sampling_estimates = sampling_estimates            # This will be a dictonary with the specific statistic values for the test
 
@@ -28,11 +28,11 @@ class Hypotest:
             self.cv = np.array([rv.ppf(1 - self.sig)])
             self.pvalue = 1 - rv.cdf(self.ts)
 
-        # Boolean value that indicates if null hypothesis should be rejected or not given the results of the test.
+        # Boolean value that indicates if null hypothesis should be rejected or not given the results of the test
         self.reject = self.pvalue < self.sig
 
 
-    def power(self, v1, show = True, align="l", border_style = "DOUBLE_BORDER", **kwargs):
+    def power(self, v1, show = True, align = "l", border_style = "DOUBLE_BORDER", **kwargs):
 
         v1 = np.array(v1)
 
@@ -57,7 +57,7 @@ class Hypotest:
         return powers
 
 
-    def summarize(self, show = True, minimal = False, align="l", border_style = "DOUBLE_BORDER", **kwargs):
+    def summarize(self, show = True, minimal = False, align = "l", border_style = "DOUBLE_BORDER", **kwargs):
         table = prettytable.PrettyTable(["Hypothesis test attributes", "Results"], **kwargs)
 
         # Set border style

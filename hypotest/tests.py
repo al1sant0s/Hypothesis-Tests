@@ -112,6 +112,6 @@ class HypoPropTest(Hypotest):
             self.estdv = np.sqrt(pi0*(1 - pi0)/n1) 
             description = f"Z {tail[alternative]} test for one proportion."
             sampling_estimates = {"Sampling proportion": self.prop1, "Sampling size": self.n1}
-            super(HypoPropTest, self).__init__(norm(), f"Normal(0, 1)", sig, (p1 - pi0)/self.estdv, pi0, alternative, description, sampling_estimates)
+            super().__init__(norm(), f"Normal(0, 1)", sig, (p1 - pi0)/self.estdv, pi0, alternative, description, sampling_estimates)
     def error02comp(self, v1):
         return HypoTstudTest.error02comp(self, v1)
